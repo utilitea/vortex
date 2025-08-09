@@ -1,0 +1,848 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>iTV - Canais Gratuitos</title>
+  
+  <link rel="icon" href="favicon.png" />
+  <meta property="og:title" content="iTV - Canais Gratuitos">
+  <meta property="og:description" content="Assista canais de TV gratuitos de forma fácil e rápida.">
+  <meta property="og:image" content="favicon.png">
+
+  <style>
+    :root {
+      --bg: #0b0f0b;
+      --panel: #0f1911;
+      --green-1: #0fb96a;
+      --green-2: #0aa95a;
+      --accent: #14d07b;
+      --muted: #bfcfc2;
+      --card-radius: 12px;
+      --gap: 18px;
+      --max-width: 1280px;
+    }
+    *, *:before, *:after { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; font-family: Segoe UI, Roboto, Arial, sans-serif; background: linear-gradient(180deg, var(--bg), #07120a 120%); color: #eee; }
+    .wrap { max-width: var(--max-width); margin: 0 auto; padding: 18px; }
+
+    /* Top bar */
+    header.topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: linear-gradient(90deg, rgba(2,40,20,0.98), rgba(7,60,35,0.95));
+      padding: 12px 18px; border-bottom: 1px solid rgba(255,255,255,0.03);
+      display: flex; align-items: center; gap: 18px;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo img { height: 44px; width: 44px; border-radius: 8px; object-fit: cover; box-shadow: 0 4px 18px rgba(10,160,80,0.12); }
+    .brand { font-weight: 700; font-size: 20px; letter-spacing: 0.6px; color: var(--accent); }
+    .search { margin-left: 12px; flex: 1; display: flex; align-items: center; }
+    .search input {
+      width: 100%; padding: 14px 18px; border-radius: 12px; border: none; background: rgba(255,255,255,0.08); color: #fff;
+      outline: none; font-size: 15px; box-shadow: inset 0 -2px 0 rgba(0,0,0,0.4);
+    }
+    .actions { display: flex; gap: 12px; align-items: center; }
+    .action-btn { padding: 8px 12px; border-radius: 10px; background: transparent; border: 1px solid rgba(255,255,255,0.06); color: var(--muted); cursor: pointer; }
+
+    main { padding: 22px 0; }
+    h2.section-title { margin: 8px 0 12px; font-weight: 600; color: #dffbe8; }
+
+    /* Horizontal carousel */
+    .carousel { margin-bottom: 30px; position: relative; }
+    .carousel .wrap-row { display: flex; gap: 18px; overflow-x: auto; padding: 12px 10px; scroll-behavior: smooth; }
+    .carousel .wrap-row::-webkit-scrollbar { height: 10px; }
+    .carousel .wrap-row::-webkit-scrollbar-thumb { background: linear-gradient(90deg, var(--green-1), var(--green-2)); border-radius: 10px; }
+    
+    .channel-card {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      min-width: 140px; max-width: 220px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.08));
+      padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.03); cursor: pointer; transition: transform .15s ease, box-shadow .15s, border-color .15s;
+      flex: 0 0 auto;
+    }
+    .channel-card:focus, .channel-card.active {
+      outline: none; transform: translateY(-6px); box-shadow: 0 14px 30px rgba(10,180,100,0.15);
+      border: 1px solid var(--accent);
+    }
+    .channel-thumb { width: 180px; height: 100px; border-radius: 10px; object-fit: contain; background: linear-gradient(90deg, #0b1912, rgba(255,255,255,0.02)); display: flex; align-items: center; justify-content: center; }
+    .channel-thumb img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; }
+    .channel-name { font-size: 14px; color: var(--muted); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+
+    .carousel .nav {
+      position: absolute; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.65)); border: 1px solid rgba(255,255,255,0.03);
+      cursor: pointer; z-index: 10; backdrop-filter: blur(4px); transition: transform .15s;
+    }
+    .carousel .nav:hover { transform: translateY(-50%) scale(1.1); }
+    .carousel .nav.left { left: 6px; }
+    .carousel .nav.right { right: 6px; }
+    .carousel .nav:focus { outline: 2px solid rgba(20,200,110,0.3); }
+
+    /* Player modal (agora em tela cheia) */
+    .player-modal {
+      position: fixed; inset: 0; background: #000; display: none; align-items: center; justify-content: center; z-index: 100;
+    }
+    .player-modal.open { display: flex; }
+    .player-box { width: 100%; height: 100%; position: relative; }
+    
+    .viewer { width: 100%; height: 100%; background: #000; overflow: hidden; position: relative; }
+    .viewer video { width: 100%; height: 100%; display: block; }
+
+    /* Overlay do menu de canais */
+    .channel-overlay {
+      position: absolute; bottom: 0; left: 0; width: 100%;
+      background: linear-gradient(0deg, rgba(0,0,0,0.9), transparent);
+      padding: 24px 0 40px;
+      display: none;
+      align-items: flex-end;
+      flex-direction: column;
+      pointer-events: none;
+      transition: transform 0.3s ease;
+      transform: translateY(100%);
+    }
+    .channel-overlay.visible {
+      display: flex;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .channel-overlay-title {
+      font-size: 16px; color: var(--muted); margin-bottom: 12px; align-self: flex-start; margin-left: 28px;
+    }
+    .channel-list-container {
+      width: 100%;
+      overflow-x: auto;
+      padding: 0 28px;
+      scroll-behavior: smooth;
+    }
+    .channel-list {
+      display: flex; gap: 16px;
+    }
+    .overlay-card {
+      min-width: 180px;
+      flex: 0 0 auto;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 10px; border-radius: 8px; border: 2px solid transparent;
+      background: rgba(255,255,255,0.05);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .overlay-card.active, .overlay-card:focus {
+      outline: none;
+      background: var(--green-1);
+      box-shadow: 0 0 15px var(--accent);
+      transform: translateY(-8px);
+    }
+    .overlay-card img { 
+      width: 100%; 
+      height: 90px; /* Tamanho fixo para as thumbnails do overlay */
+      object-fit: cover; /* Recorta a imagem para preencher o espaço */
+      border-radius: 6px; 
+    }
+    .overlay-card .name { font-size: 14px; margin-top: 8px; color: #fff; text-align: center; }
+
+    /* Controles do player (no topo do overlay) */
+    .player-controls {
+      position: absolute; top: 20px; left: 20px; right: 20px;
+      display: none;
+      align-items: center;
+      background: linear-gradient(180deg, rgba(0,0,0,0.8), transparent);
+      padding: 10px 15px;
+      border-radius: 10px;
+    }
+    .player-controls.visible { display: flex; }
+    .player-title { font-size: 18px; font-weight: 700; color: #fff; margin: 0; }
+    .close-player {
+      margin-left: auto;
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    /* Responsive rules */
+    @media (max-width: 700px) {
+      .channel-card { min-width: 45%; max-width: 48%; }
+      .channel-thumb { width: 100%; height: 110px; }
+      .channel-overlay { padding: 12px 0 20px; }
+      .channel-list-container { padding: 0 12px; }
+      .overlay-card { min-width: 140px; }
+    }
+    @media (min-width: 1024px) {
+      .channel-card { min-width: calc((100% - (5 * var(--gap))) / 6); max-width: calc((100% - (5 * var(--gap))) / 6); }
+    }
+    @media (max-width: 480px) {
+      .topbar .search { display: none; }
+      .player-controls { top: 10px; left: 10px; right: 10px; padding: 6px 10px; }
+      .player-title { font-size: 16px; }
+    }
+
+    .hint { font-size: 13px; color: #9fdab3; margin-top: 6px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap" style="display:flex;align-items:center;gap:12px;width:100%">
+      <div class="logo" style="flex:0 0 auto">
+        <a href="#" title="Página principal"><img src="favicon.png" alt="logo"></a>
+        <div>
+          <div class="brand">iTV • canais</div>
+          <div style="font-size:12px;color:var(--muted)">Canais gratuitos • Modelo</div>
+        </div>
+      </div>
+
+      <div class="search" aria-label="buscar canais">
+        <input id="searchInput" placeholder="Buscar canais ..." aria-label="Buscar canais">
+      </div>
+
+      <div class="actions">
+        <button class="action-btn" id="btn-login">Login</button>
+        <button class="action-btn" id="btn-cad">Cadastro</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" id="mainContent">
+    <p class="hint">Dica: use as setas do controle remoto (← → ↑ ↓) para navegar. Pressione <strong>Enter</strong> para abrir o canal e <strong>Esc</strong> para fechar.</p>
+  </main>
+
+  <div class="player-modal" id="playerModal" aria-hidden="true">
+    <div class="player-box" role="dialog" aria-modal="true" aria-label="Player de canais">
+      <div class="viewer" id="viewer">
+        <video id="videoPlayer" controls playsinline></video>
+        
+        <div class="player-controls" id="playerControls">
+          <h3 class="player-title" id="nowPlayingTitle">Carregando...</h3>
+          <button class="close-player" id="closePlayer">Fechar</button>
+        </div>
+        
+        <div class="channel-overlay" id="channelOverlay">
+          <div class="channel-overlay-title">Canais disponíveis</div>
+          <div class="channel-list-container">
+            <div class="channel-list" id="channelList">
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script>
+    const channelsData = {
+  "Tv Aberta": [
+    {
+      "title": "SBT",
+      "src": "https://stream.amsolution.net.br:8443/live/66db1cf131d45/index.m3u8",
+      "thumbnail": "https://static.wikia.nocookie.net/tvpediabrasil/images/a/ad/Maissbt.jpg/revision/latest/thumbnail/width/360/height/360?cb=20240820055259&path-prefix=pt-br"
+    },
+    {
+      "title": "Rede Tv (Tv Pampa)",
+      "src": "https://video04.logicahost.com.br/tvpampa/tvpampa/playlist.m3u8",
+      "thumbnail": "https://redeitv.online/roku/imgcanais/cana-rede-tv.png?alt=media&token=cc279d94-72ac-4523-8227-1d9b96a9df58"
+    },
+    {
+      "title": "Rede TV",
+      "src": "https://tv01.zas.media:1936/redetvparana/redetvparana/playlist.m3u8",
+      "thumbnail": "https://redeitv.online/roku/imgcanais/cana-rede-tv.png?alt=media&token=cc279d94-72ac-4523-8227-1d9b96a9df58"
+    },
+    {
+      "title": "Band",
+      "src": "https://5b7f3c45ab7c2.streamlock.net/arapuan/ngrp:arapuan_all/playlist.m3u8",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Rede_Bandeirantes_logo_2018.svg/800px-Rede_Bandeirantes_logo_2018.svg.png"
+    }
+  ],
+  "Filmes": [
+    {
+      "title": "Runtime",
+      "src": "https://run-rt-br.otteravision.com/run/rt_br/rt_br_720p_high.m3u8",
+      "thumbnail": "https://img3.static-ottera.com/prod/run/linear_channel/thumbnails/poster/366x206/runtime_brazil_1400x2000_0.jpg"
+    },
+    {
+      "title": "Ação",
+      "src": "https://run-rt-ra.otteravision.com/run/rt_ra/rt_ra_720.m3u8",
+      "thumbnail": "https://img2.static-ottera.com/prod/run/linear_channel/thumbnails/widescreen/366x206/runtime_br_action_bg.jpg"
+    },
+    {
+      "title": "Comédia",
+      "src": "https://run-rc-br.otteravision.com/run/rc_br/rc_br_720.m3u8",
+      "thumbnail": "https://img3.static-ottera.com/prod/run/linear_channel/thumbnails/poster/366x206/runtime_comedy_brazil_1400x2000.jpg"
+    },
+    {
+      "title": "Família",
+      "src": "https://run-rufb.otteravision.com/run/rufb/rufb.m3u8",
+      "thumbnail": "https://i.ytimg.com/vi/hJeqJsSxV8w/maxresdefault.jpg"
+    },
+    {
+      "title": "Moviesphere",
+      "src": "https://amg00353-amg00353c29-plex-us-3205.playouts.now.amagi.tv/1080p-cc/index.m3u8",
+      "thumbnail": "https://deadline.com/wp-content/uploads/2024/06/MovieSphere.jpg?w=681&h=383&crop=1"
+    },
+    {
+      "title": "Sony One",
+      "src": "https://spt-sonyoneclassicas-1-br.samsung.wurl.tv/playlist.m3u8",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1sc9dEugbu6N6dtjezqyh562rleckrhJ9AA&s"
+    },
+    {
+      "title": "Sony One Emoções",
+      "src": "https://spt-sonyoneemocoes-1-br.samsung.wurl.tv/playlist.m3u8",
+      "thumbnail": "https://images.samsung.com/is/image/samsung/assets/br/tvs/smart-tv/channel-list/SONYEMOCOESType-B_-1x1-Circles-476x476AngelaSuarez.png?$ORIGIN_PNG$"
+    },
+    {
+      "title": "Nova Play",
+      "src": "https://stmv1.srvstm.com/abc7891/abc7891/playlist.m3u8",
+      "thumbnail": "https://www.cxtv.com.br/img/Tvs/Logo/webp-m/330749dcc61ffa6816423d9d3452808e.webp"
+    },
+    {
+      "title": "Cindie Lite",
+      "src": "https://cc-hqw8u5r1nshjc.akamaized.net/scheduler/scheduleMaster/352.m3u8",
+      "thumbnail": "https://d1y2dphb29uhu6.cloudfront.net/c/433/images/cqYA0kmQKlUvEWe95h6O7g.png"
+    },
+    {
+      "title": "Adrenalina Freezone",
+      "src": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/61b790b985706b00072cb797/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&channel_id=channel&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&genre=ROKU_ADS_CONTENT_GENRE&is_lat=1&platform=web&rdid=channel&studio_id=viacom&tags=ROKU_CONTENT_TAGS",
+      "thumbnail": "https://images.pluto.tv/channels/61b790b985706b00072cb797/colorLogoPNG.png"
+    },
+    {
+      "title": "Netmovies",
+      "src": "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/663b9de4f999220008230fa8/master.m3u8?CreatedWithS2by=Neywerson&country=BR&deviceType=samsung-tvplus&deviceMake=samsung&deviceModel=samsung&deviceVersion=unknown&appVersion=unknown&deviceLat=0&deviceLon=0&deviceDNT=%7BTAROPT%7D&deviceId=%7BPSID%7D&advertisingId=%7BPSID%7D&us_privacy=1YNY&samsung_app_domain=%7BAPP_DOMAIN%7D&samsung_app_name=%7BAPP_NAME%7D&profileLimit=&profileFloor=&embedPartner=samsung-tvplus&profilesFromStream=true",
+      "thumbnail": "https://images.pluto.tv/channels/663b9de4f999220008230fa8/colorLogoPNG.png"
+    }
+  ],
+  "Séries": [
+    {
+      "title": "Master Chefe",
+      "src": "https://amg00627-amg00627c9-runtime-latam-2613.playouts.now.amagi.tv/playlist/amg00627-banijayfast-masterchefbrazil-runtimelatam/playlist.m3u8",
+      "thumbnail": "https://img3.static-ottera.com/prod/run/linear_channel/thumbnails/widescreen/366x206/runtime_masterchefbrasil_logo_1920x1080_-_suraj_s.jpg"
+    },
+    {
+      "title": "NUMB3RS",
+      "src": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/67f960c5441853fe50e7afc1/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&channel_id=channel&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&genre=ROKU_ADS_CONTENT_GENRE&is_lat=1&platform=web&rdid=channel&studio_id=viacom&tags=ROKU_CONTENT_TAGS",
+      "thumbnail": "https://images.pluto.tv/channels/67f960c5441853fe50e7afc1/colorLogoPNG.png"
+    },
+  {
+    "title": "A Caçadora de Relíquias",
+    "src": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/67e59a6557487a8b7fe73e23/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&channel_id=channel&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&genre=ROKU_ADS_CONTENT_GENRE&is_lat=1&platform=web&rdid=channel&studio_id=viacom&tags=ROKU_CONTENT_TAGS",
+    "thumbnail": "https://images.pluto.tv/channels/67e59a6557487a8b7fe73e23/colorLogoPNG.png"
+  },
+  {
+    "title": "Tastemade",
+    "src": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5fd1419a3b4f4b000773ba85/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&channel_id=channel&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&genre=ROKU_ADS_CONTENT_GENRE&is_lat=1&platform=web&rdid=channel&studio_id=viacom&tags=ROKU_CONTENT_TAGS",
+    "thumbnail": "https://images.pluto.tv/channels/5fd1419a3b4f4b000773ba85/colorLogoPNG.png"
+  },
+  {
+    "title": "TV Cozinha",
+    "src": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5f1ef23020a5ac0007e5e8ea/master.m3u8?advertisingId={PSID}&appVersion=unknown&deviceDNT={TARGETOPT}&deviceId={PSID}&deviceLat=0&deviceLon=&deviceMake=samsung&deviceModel=samsung&deviceType=samsung-tvplus&deviceVersion=unknown",
+    "thumbnail": "https://images.pluto.tv/channels/5f1ef23020a5ac0007e5e8ea/colorLogoPNG.png"
+  },
+  {
+    "title": "Viagens",
+    "src": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/5f32d432d612e50007e56133/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&channel_id=channel&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&genre=ROKU_ADS_CONTENT_GENRE&is_lat=1&platform=web&rdid=channel&studio_id=viacom&tags=ROKU_CONTENT_TAGS",
+    "thumbnail": "https://images.pluto.tv/channels/5f32d432d612e50007e56133/colorLogoPNG.png"
+  },
+  {
+    "title": "CSI: Miami",
+    "src": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/63eb9c5351f5d000085e8d7e/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&channel_id=channel&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&genre=ROKU_ADS_CONTENT_GENRE&is_lat=1&platform=web&rdid=channel&studio_id=viacom&tags=ROKU_CONTENT_TAGS",
+    "thumbnail": "https://images.pluto.tv/channels/63eb9c5351f5d000085e8d7e/colorLogoPNG.png"
+  },
+  {
+    "title": "NCIS",
+    "src": "https://stitcher-ipv4.pluto.tv/v1/stitch/embed/hls/channel/63eb9fdda995710008991c54/master.m3u8?CreatedWithS2by=Neywerson&country=BR&deviceType=samsung-tvplus&deviceMake=samsung&deviceModel=samsung&deviceVersion=unknown&appVersion=unknown&deviceLat=0&deviceLon=0&deviceDNT=%7BTAROPT%7D&deviceId=%7BPSID%7D&advertisingId=%7BPSID%7D&us_privacy=1YNY&samsung_app_domain=%7BAPP_DOMAIN%7D&samsung_app_name=%7BAPP_NAME%7D&profileLimit=&profileFloor=&embedPartner=samsung-tvplus&profilesFromStream=true",
+    "thumbnail": "https://images.pluto.tv/channels/63eb9fdda995710008991c54/colorLogoPNG.png"
+    }
+  ],
+  "Variedades": [
+  {
+    "title": "DiaTV Pluto",
+    "src": "https://service-stitcher.clusters.pluto.tv/v1/stitch/embed/hls/channel/662156805a31f70013dba21c/master.m3u8?advertisingId=channel&appName=rokuchannel&appVersion=1.0&bmodel=bm1&channel_id=channel&content=channel&content_rating=ROKU_ADS_CONTENT_RATING&content_type=livefeed&coppa=false&deviceDNT=1&deviceId=channel&deviceMake=rokuChannel&deviceModel=web&deviceType=rokuChannel&deviceVersion=1.0&embedPartner=rokuChannel&genre=ROKU_ADS_CONTENT_GENRE&is_lat=1&platform=web&rdid=channel&studio_id=viacom&tags=ROKU_CONTENT_TAGS",
+    "thumbnail": "https://diaestudio.com/wp-content/webp-express/webp-images/uploads/2024/09/unnamed-file-3.png.webp"
+  },
+  {
+    "title": "UOL",
+    "src": "https://video01.soultv.com.br/uoltv/uoltv/playlist.m3u8",
+    "thumbnail": "https://d14vd6r4ppsx57.cloudfront.net/media/brand/img/web/300/img_background_image_web.jpg"
+  },
+  {
+    "title": "ypêtv",
+    "src": "https://video09.logicahost.com.br/yptvoficioal/yptvoficioal/playlist.m3u8",
+    "thumbnail": "https://ypetv.com.br/wp-content/uploads/2024/08/LOGO-HORIZONTAL-YPE-TV.png"
+  },
+  {
+    "title": "Tv Caravelas",
+    "src": "https://video09.logicahost.com.br/tvcaravelas/tvcaravelas/playlist.m3u8",
+    "thumbnail": "https://pa-str.srvsite.com/arquivos/4506/cabecalho-4506-20190507094833.png"
+  },
+  {
+    "title": "Tv Tudo",
+    "src": "https://tv02.zas.media:1936/tvtudo/tvtudo/playlist.m3u8",
+    "thumbnail": "https://www.tvtudo.tv.br/wp-content/uploads/sites/34/2022/12/logo.png"
+  },
+  {
+    "title": "Tv Metropolitana",
+    "src": "https://stmv5.samcast.com.br/claudio8701/claudio8701/playlist.m3u8",
+    "thumbnail": "https://pa-str.srvsite.com/arquivos/7258/cabecalho-7258-20240527153716.png"
+  },
+  {
+    "title": "Tv Carioca Internacional",
+    "src": "https://video04.logicahost.com.br/cariocainternacional/cariocainternacional/playlist.m3u8",
+    "thumbnail": "https://www.cxtv.com.br/img/Tvs/Logo/webp-m/ae3270712e80a6ee4cd2dd542fcc48c6.webp"
+  },
+  {
+    "title": "TV MAX",
+    "src": "https://video09.logicahost.com.br/tvmax/tvmax/playlist.m3u8",
+    "thumbnail": "https://static.wixstatic.com/media/b88112_72f850e0bc8e4ccda62ab49b9cf993c9~mv2.png/v1/fill/w_136,h_136,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/LOGO_TVMAX%20BRANCO%20SITE.png"
+  },
+  {
+    "title": "Rede Tv Mais",
+    "src": "https://video09.logicahost.com.br/redetvmais/redetvmais/playlist.m3u8",
+    "thumbnail": "https://www.cxtv.com.br/img/Tvs/Logo/webp-m/de5e2a5c9eef76effa75993a224b9e61.webp"
+  },
+  {
+    "title": "Tv Mega Brasil",
+    "src": "https://video01.kshost.com.br/sergio7305/sergio7305/playlist.m3u8",
+    "thumbnail": "https://tvmegabrasil.com.br/wp-content/uploads/2024/10/cropped-12.png"
+  },
+  {
+    "title": "Tv Mais Maricá",
+    "src": "https://5cf4a2c2512a2.streamlock.net/tvmaismarica/tvmaismarica/playlist.m3u8",
+    "thumbnail": "https://www.cxtv.com.br/img/Tvs/Logo/webp-m/343eeb4ef1b772d8727b9e450590081c.webp"
+  },
+  {
+    "title": "Bem Mais Tv",
+    "src": "https://video09.logicahost.com.br/bemmaistv01/bemmaistv01/playlist.m3u8",
+    "thumbnail": "https://www.cxtv.com.br/img/Tvs/Logo/webp-m/6f9f86a3d4d01a4c3756ee01a7401ec6.webp"
+  },
+  {
+    "title": "Canal 10",
+    "src": "https://video05.logicahost.com.br/ararutv/ararutv/playlist.m3u8",
+    "thumbnail": "https://redecanal10.com.br/storage/33/config/ILTU5SIUNDcrO8x5pdi885Twch4v1EdLOxIdJZzE.png"
+  },
+  {
+    "title": "Diário",
+    "src": "https://netdiario.brasilstream.com.br/hls/netdiario/index.m3u8",
+    "thumbnail": "https://netdiario.com.br/wp-content/uploads/2022/02/logo-1.png"
+  },
+  {
+    "title": "TV Santa Cecilia",
+    "src": "https://60d88f8ce1206.streamlock.net/2063/2063/playlist.m3u8",
+    "thumbnail": "https://www.cxtv.com.br/img/Tvs/Logo/webp-m/689f8e1fbf539be1c6e2a36b9283b324.webp"
+  },
+  {
+    "title": "Play TV",
+    "src": "https://isaocorp.cloudecast.com/playtv/index.fmp4.m3u8",
+    "thumbnail": "https://playtv.com.br/site/wp-content/uploads/2024/07/PlayTVHorizontal@500x.png"
+  },
+  {
+    "title": "Rede NGT",
+    "src": "https://isaocorp.cloudecast.com/ngt/index.fmp4.m3u8",
+    "thumbnail": "https://redengt.com.br/wp-content/uploads/2025/04/2bd40dc5-2db0-4c8b-985c-224c66e08b24.png"
+  },
+  {
+    "title": "Tv Meio",
+    "src": "https://isaocorp.cloudecast.com/redemeio/index.m3u8",
+    "thumbnail": "https://d14vd6r4ppsx57.cloudfront.net/media/brand/img/web/218/218_img_bg_image_293x165_small.jpg"
+  },
+  {
+    "title": "Rede TVS",
+    "src": "https://video01.kshost.com.br:4443/rede1250/rede1250/playlist.m3u8",
+    "thumbnail": "https://d14vd6r4ppsx57.cloudfront.net/media/brand/img/web/313/img_background_image_web.jpg"
+  },
+  {
+    "title": "Acesso",
+    "src": "https://cdn.live.br1.jmvstream.com/webtv/tvacessochannel/playlist/playlist.m3u8",
+    "thumbnail": "https://d14vd6r4ppsx57.cloudfront.net/media/brand/img/web/315/img_background_image_web.jpg"
+  },
+  {
+    "title": "Rede NGT",
+    "src": "https://isaocorp.cloudecast.com/ngt/index.fmp4.m3u8",
+    "thumbnail": "https://d14vd6r4ppsx57.cloudfront.net/media/brand/img/web/184/184_img_bg_image_293x165_small.jpg"
+  },
+  {
+    "title": "Unique",
+    "src": "https://pop.uniquetv.com.br/uniquetv/video.m3u8",
+    "thumbnail": "https://d14vd6r4ppsx57.cloudfront.net/media/brand/img/web/62/62_img_bg_image_293x165_small.jpg"
+  },
+  {
+    "title": "Sou [.tv]",
+    "src": "https://vdo1.audiostream.com.br:3010/live/soutvlive.m3u8",
+    "thumbnail": "https://d14vd6r4ppsx57.cloudfront.net/media/brand/img/web/139/139_img_bg_image_293x165_small.jpg"
+  },
+  {
+    "title": "VRT",
+    "src": "https://sistemavrt2023.vrtchannel.tv.br:3626/hybrid/play.m3u8",
+    "thumbnail": "https://d14vd6r4ppsx57.cloudfront.net/media/brand/img/web/69/69_img_bg_image_293x165_small.jpg"
+  }
+      ],
+      "Jornalismo": [
+  {
+    "title": "Record News",
+    "src": "https://run-rnw-rn.otteravision.com/rnw/rn/rnw_rn_720p_high.m3u8",
+    "thumbnail": "https://i.ytimg.com/vi/3QCfJFMolcg/maxresdefault.jpg"
+  },
+  {
+    "title": "Record News ES",
+    "src": "https://5cf4a2c2512a2.streamlock.net/8016/8016/playlist.m3u8",
+    "thumbnail": "https://i.ytimg.com/vi/3QCfJFMolcg/maxresdefault.jpg"
+  },
+  {
+    "title": "CNN Brasil",
+    "src": "https://video01.soultv.com.br/cnnbrasil/cnnbrasil/playlist.m3u8",
+    "thumbnail": "https://d14vd6r4ppsx57.cloudfront.net/media/brand/img/web/141/141_img_bg_image_293x165_small.jpg"
+  },
+  {
+    "title": "CNN Portugal",
+    "src": "https://video-auth6.iol.pt/edge_servers/cnn-240p/chunks.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9OC85LzIwMjUgNDoyMzoyIFBNJmhhc2hfdmFsdWU9dVhFL082TVpTRGM1N2hVY1FoMitFdz09JnZhbGlkbWludXRlcz0xNDQwJmlkPTAzMDEwNzJkLTcyNTItNGJlNy1hZjY5LTY1OTlhZDMxNmE2ZA==",
+    "thumbnail": "https://s3minio.webativa.com.br/redeitv/thumb-cnn-portugal.png"
+  },
+  {
+    "title": "SIC Notícias",
+    "src": "https://d277k9d1h9dro4.cloudfront.net/out/v1/293e7c3464824cbd8818ab8e49dc5fe9/index.m3u8",
+    "thumbnail": "https://s3minio.webativa.com.br/redeitv/thumb-sic-noticias.png"
+  }
+      ],
+      "Religiosos": [
+  {
+    "title": "Oasis Web Tv",
+    "src": "https://stmv5.samcast.com.br/oasistv/oasistv/playlist.m3u8",
+    "thumbnail": "https://www.oasistv.com.br/imagens/logosite.png"
+  },
+  {
+    "title": "Rede Vida",
+    "src": "https://d12e4o88jd8gex.cloudfront.net/out/v1/cea3de0b76ac4e82ab8ee0fd3f17ce12/index.m3u8",
+    "thumbnail": "https://redevida.com.br/wp-content/uploads/2024/07/logo-redevida.png.webp"
+  },
+  {
+    "title": "Tv Aparecida",
+    "src": "https://cdn.live.br1.jmvstream.com/w/LVW-9716/LVW9716_HbtQtezcaw/playlist.m3u8",
+    "thumbnail": "https://www.bastidoresdatv.com.br/wp-content/uploads/2017/01/TV-Aparecida-2017.jpg"
+  },
+  {
+    "title": "Rede Gospel",
+    "src": "https://cdn.live.br1.jmvstream.com/w/LVW-8719/LVW8719_AcLVAxWy5J/playlist.m3u8",
+    "thumbnail": "https://www.cxtv.com.br/img/Tvs/Logo/webp-m/bf64a6c1f59709514cf0d763b6c0faa6.webp"
+  },
+  {
+    "title": "Tv Life América",
+    "src": "https://streaming.cloudecast.com/hls/tvlifeamerica/index.m3u8",
+    "thumbnail": "https://s3minio.webativa.com.br/redeitv/thumb-tv-life-america.png"
+  },
+  {
+    "title": "Rede Universo Tv",
+    "src": "https://srv5.zcast.com.br/universotv/universotv/playlist.m3u8",
+    "thumbnail": "https://pa-str.srvsite.com/arquivos/7032/cabecalho-7032-20241028161430.png"
+  },
+  {
+    "title": "Gospel Music",
+    "src": "https://stmv1.srvif.com/gmusic/gmusic/playlist.m3u8",
+    "thumbnail": "https://www.cxtv.com.br/img/Tvs/Logo/webp-m/5cfae87cb8a191172ff08ff1b13c3c05.webp"
+  }
+  ],
+    };    
+    (function() {
+      const mainContent = document.getElementById('mainContent');
+      const searchInput = document.getElementById('searchInput');
+      const modal = document.getElementById('playerModal');
+      const video = document.getElementById('videoPlayer');
+      const nowPlayingTitle = document.getElementById('nowPlayingTitle');
+      const closePlayerBtn = document.getElementById('closePlayer');
+      const channelOverlay = document.getElementById('channelOverlay');
+      const channelList = document.getElementById('channelList');
+      const playerControls = document.getElementById('playerControls');
+      
+      let allChannels = Object.values(channelsData).flat();
+      let currentChannelIndex = -1;
+      let hideOverlayTimeout;
+
+      // --- Lógica de Renderização Dinâmica (Home) ---
+      function renderCarousels() {
+        mainContent.querySelectorAll('.carousel').forEach(car => car.remove());
+        
+        for (const state in channelsData) {
+          const section = document.createElement('section');
+          section.className = 'carousel';
+          section.setAttribute('tabindex', '-1');
+          section.innerHTML = `
+            <h2 class="section-title">${state} <small style="float:right;color:var(--muted)">Todos</small></h2>
+            <div class="nav left" aria-hidden="true" data-action="scroll-left">◀</div>
+            <div class="nav right" aria-hidden="true" data-action="scroll-right">▶</div>
+            <div class="wrap-row" role="list" aria-label="Canais de ${state}"></div>
+          `;
+          const wrapRow = section.querySelector('.wrap-row');
+          channelsData[state].forEach(channel => {
+            const card = document.createElement('div');
+            card.className = 'channel-card';
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('data-src', channel.src);
+            card.setAttribute('data-title', channel.title);
+            card.innerHTML = `
+              <div class="channel-thumb"><img src="${channel.thumbnail}" alt="Thumbnail do canal ${channel.title}"></div>
+              <div class="channel-name">${channel.title}</div>
+            `;
+            wrapRow.appendChild(card);
+          });
+          mainContent.appendChild(section);
+        }
+        setupCarousels();
+      }
+
+      function setupCarousels() {
+        document.querySelectorAll('.carousel').forEach(car => {
+          const row = car.querySelector('.wrap-row');
+          const btnLeft = car.querySelector('[data-action="scroll-left"]');
+          const btnRight = car.querySelector('[data-action="scroll-right"]');
+          
+          btnLeft?.addEventListener('click', () => row.scrollBy({ left: -row.clientWidth * 0.6, behavior: 'smooth' }));
+          btnRight?.addEventListener('click', () => row.scrollBy({ left: row.clientWidth * 0.6, behavior: 'smooth' }));
+    
+          row.querySelectorAll('.channel-card').forEach(card => {
+            card.addEventListener('click', () => openPlayer(card.dataset.src, card.dataset.title));
+            card.addEventListener('keydown', e => {
+              if (e.key === 'Enter') openPlayer(card.dataset.src, card.dataset.title);
+            });
+          });
+        });
+      }
+    
+      // --- Lógica de Busca ---
+      searchInput.addEventListener('input', (e) => {
+        const q = e.target.value.toLowerCase().trim();
+        document.querySelectorAll('.channel-card').forEach(card => {
+          const name = (card.querySelector('.channel-name')?.textContent || '').toLowerCase();
+          card.style.display = name.includes(q) ? '' : 'none';
+        });
+      });
+    
+      // --- Lógica do Player Modal e Vídeo ---
+      function loadAndPlay(src) {
+        // Pausa o vídeo atual e limpa a fonte
+        video.pause();
+        video.src = '';
+        video.load();
+
+        const isHls = src.endsWith('.m3u8');
+        
+        if (isHls && typeof Hls !== 'undefined' && Hls.isSupported()) {
+          const hls = new Hls();
+          hls.loadSource(src);
+          hls.attachMedia(video);
+          hls.on(Hls.Events.MANIFEST_PARSED, function() {
+            video.play();
+          });
+        } else if (isHls && (video.canPlayType('application/vnd.apple.mpegurl') || video.canPlayType('application/x-mpegurl'))) {
+          // Suporte nativo do Safari para HLS
+          video.src = src;
+          video.play();
+        } else {
+          // Outros formatos (mp4, webm) ou navegadores sem suporte a HLS
+          video.src = src;
+          video.play();
+        }
+      }
+    
+      function openPlayer(src, title) {
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        nowPlayingTitle.textContent = title;
+        document.title = `${title} | iTV`;
+        
+        currentChannelIndex = allChannels.findIndex(c => c.src === src);
+        loadAndPlay(src);
+        
+        renderChannelOverlay();
+        showOverlay();
+      }
+
+      function closePlayer() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        video.pause();
+        video.src = "";
+        document.title = 'iTV - Canais Gratuitos';
+        
+        const focusedCard = document.querySelector('.channel-card.active');
+        if (focusedCard) focusedCard.focus();
+      }
+    
+      function renderChannelOverlay() {
+        channelList.innerHTML = '';
+        allChannels.forEach((channel, index) => {
+          const card = document.createElement('div');
+          card.className = 'overlay-card';
+          card.setAttribute('tabindex', '0');
+          card.setAttribute('data-index', index);
+          if (index === currentChannelIndex) {
+            card.classList.add('active');
+          }
+          card.innerHTML = `
+            <img src="${channel.thumbnail}" alt="Thumbnail do canal ${channel.title}">
+            <div class="name">${channel.title}</div>
+          `;
+          card.addEventListener('click', () => {
+            changeChannel(index);
+          });
+          card.addEventListener('keydown', e => {
+            if (e.key === 'Enter') changeChannel(index);
+          });
+          channelList.appendChild(card);
+        });
+        updateOverlayFocus();
+      }
+      
+      function updateOverlayFocus() {
+        const activeCard = channelList.querySelector(`[data-index='${currentChannelIndex}']`);
+        if (activeCard) {
+          activeCard.focus();
+          const container = channelList.parentElement;
+          const cardRect = activeCard.getBoundingClientRect();
+          const containerRect = container.getBoundingClientRect();
+          if (cardRect.left < containerRect.left || cardRect.right > containerRect.right) {
+            container.scrollLeft += cardRect.left - containerRect.left - (containerRect.width / 2 - cardRect.width / 2);
+          }
+        }
+      }
+      
+      function changeChannel(index) {
+        if (index >= 0 && index < allChannels.length) {
+          currentChannelIndex = index;
+          const newChannel = allChannels[index];
+          loadAndPlay(newChannel.src);
+          nowPlayingTitle.textContent = newChannel.title;
+          document.title = `${newChannel.title} | iTV`;
+          
+          channelList.querySelectorAll('.overlay-card').forEach(c => c.classList.remove('active'));
+          const newActiveCard = channelList.querySelector(`[data-index='${index}']`);
+          if(newActiveCard) newActiveCard.classList.add('active');
+          
+          updateOverlayFocus();
+          showOverlay(); // Reinicia o timer do overlay
+        }
+      }
+
+      function showOverlay() {
+        channelOverlay.classList.add('visible');
+        playerControls.classList.add('visible');
+        clearTimeout(hideOverlayTimeout);
+        hideOverlayTimeout = setTimeout(() => {
+          channelOverlay.classList.remove('visible');
+          playerControls.classList.remove('visible');
+        }, 5000); // Esconde após 5 segundos de inatividade
+      }
+    
+      closePlayerBtn.addEventListener('click', closePlayer);
+      video.addEventListener('click', showOverlay);
+      video.addEventListener('touchstart', showOverlay);
+
+      // --- Navegação com Teclado / Controle Remoto ---
+      function handlePlayerKeys(e) {
+        showOverlay();
+        const overlayVisible = channelOverlay.classList.contains('visible');
+        
+        // Se a tecla pressionada é para navegação vertical, mudamos de canal
+        if (e.key === 'ArrowUp') {
+            changeChannel(currentChannelIndex - 1);
+            return;
+        }
+        if (e.key === 'ArrowDown') {
+            changeChannel(currentChannelIndex + 1);
+            return;
+        }
+        
+        if (overlayVisible) {
+          const focused = document.activeElement;
+          const cards = Array.from(channelList.querySelectorAll('.overlay-card'));
+          let focusedIndex = cards.indexOf(focused);
+
+          switch(e.key) {
+            case 'ArrowRight':
+              if (focusedIndex < cards.length - 1) {
+                cards[focusedIndex + 1].focus();
+              }
+              break;
+            case 'ArrowLeft':
+              if (focusedIndex > 0) {
+                cards[focusedIndex - 1].focus();
+              }
+              break;
+            case 'Enter':
+              if (focusedIndex !== -1) {
+                changeChannel(focusedIndex);
+              }
+              break;
+            case 'Escape':
+              closePlayer();
+              break;
+          }
+        } else {
+          // Se o overlay não está visível, mas uma tecla de navegação foi pressionada
+          switch(e.key) {
+            case 'Enter':
+              showOverlay();
+              break;
+            case 'Escape':
+              closePlayer();
+              break;
+          }
+        }
+      }
+      
+      function handleGlobalKeys(e) {
+        const allCards = Array.from(document.querySelectorAll('.channel-card')).filter(c => c.offsetParent !== null);
+        const active = document.activeElement;
+        let idx = allCards.indexOf(active);
+    
+        if (idx === -1 && ['ArrowDown', 'ArrowUp', 'ArrowLeft', 'ArrowRight'].includes(e.key) && allCards.length > 0) {
+          allCards[0].focus();
+          return;
+        }
+    
+        const step = window.matchMedia('(min-width:1024px)').matches ? 6 : 2;
+    
+        if (e.key === 'ArrowRight' && idx < allCards.length - 1) { allCards[idx + 1].focus(); ensureVisible(allCards[idx + 1]); }
+        else if (e.key === 'ArrowLeft' && idx > 0) { allCards[idx - 1].focus(); ensureVisible(allCards[idx - 1]); }
+        else if (e.key === 'ArrowDown' && idx + step < allCards.length) { allCards[idx + step].focus(); ensureVisible(allCards[idx + step]); }
+        else if (e.key === 'ArrowUp' && idx - step >= 0) { allCards[idx - step].focus(); ensureVisible(allCards[idx - step]); }
+        else if (e.key === 'Enter' && idx >= 0) { openPlayer(allCards[idx].dataset.src, allCards[idx].dataset.title); }
+      }
+      
+      function ensureVisible(el) {
+        const row = el.closest('.wrap-row');
+        if (row) {
+          const rect = el.getBoundingClientRect();
+          const rowRect = row.getBoundingClientRect();
+          if (rect.left < rowRect.left || rect.right > rowRect.right) {
+            const offset = rect.left - rowRect.left - (rowRect.width / 2 - rect.width / 2);
+            row.scrollBy({ left: offset, behavior: 'smooth' });
+          }
+        }
+      }
+    
+      document.addEventListener('keydown', (e) => {
+        if (modal.classList.contains('open')) {
+          handlePlayerKeys(e);
+        } else {
+          handleGlobalKeys(e);
+        }
+      });
+    
+      document.addEventListener('focusin', (e) => {
+        const activeCard = document.querySelector('.channel-card.active');
+        if (activeCard) activeCard.classList.remove('active');
+        
+        if (e.target.classList?.contains('channel-card')) {
+          e.target.classList.add('active');
+        }
+        
+        const activeOverlayCard = document.querySelector('.overlay-card.active');
+        if (activeOverlayCard) activeOverlayCard.classList.remove('active');
+        
+        if (e.target.classList?.contains('overlay-card')) {
+          e.target.classList.add('active');
+        }
+      });
+    
+      renderCarousels();
+    })();
+  </script>
+</body>
+</html>
