@@ -558,6 +558,7 @@
           section.className = 'carousel';
           section.setAttribute('tabindex', '-1');
           section.innerHTML = `
+            <h2 class="section-title">${state} <small style="float:right;color:var(--muted)"></small></h2>
             <div class="nav left" aria-hidden="true" data-action="scroll-left">◀</div>
             <div class="nav right" aria-hidden="true" data-action="scroll-right">▶</div>
             <div class="wrap-row" role="list" aria-label="Canais de ${state}"></div>
