@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>iTV - Canais Gratuitos</title>
+  <title>Vox</title>
   
-  <link rel="icon" href="favicon.png" />
-  <meta property="og:title" content="iTV - Canais Gratuitos">
+  <link rel="icon" href="https://utilitea.github.io/vox/vox.png" />
+  <meta property="og:title" content="Vox">
   <meta property="og:description" content="Assista canais de TV gratuitos de forma fácil e rápida.">
-  <meta property="og:image" content="favicon.png">
+  <meta property="og:image" content="https://utilitea.github.io/vox/vox.png">
 
   <style>
     :root {
@@ -185,10 +185,10 @@
   <header class="topbar">
     <div class="wrap" style="display:flex;align-items:center;gap:12px;width:100%">
       <div class="logo" style="flex:0 0 auto">
-        <a href="#" title="Página principal"><img src="favicon.png" alt="logo"></a>
+        <a href="#" title="Página principal"><img src="https://utilitea.github.io/vox/vox.png" alt="logo"></a>
         <div>
-          <div class="brand">iTV • canais</div>
-          <div style="font-size:12px;color:var(--muted)">Canais gratuitos • Modelo</div>
+          <div class="brand">Vox</div>
+          <div style="font-size:12px;color:var(--muted)">Canais gratuitos</div>
         </div>
       </div>
 
@@ -196,15 +196,10 @@
         <input id="searchInput" placeholder="Buscar canais ..." aria-label="Buscar canais">
       </div>
 
-      <div class="actions">
-        <button class="action-btn" id="btn-login">Login</button>
-        <button class="action-btn" id="btn-cad">Cadastro</button>
-      </div>
-    </div>
   </header>
 
   <main class="wrap" id="mainContent">
-    <p class="hint">Dica: use as setas do controle remoto (← → ↑ ↓) para navegar. Pressione <strong>Enter</strong> para abrir o canal e <strong>Esc</strong> para fechar.</p>
+
   </main>
 
   <div class="player-modal" id="playerModal" aria-hidden="true">
@@ -563,7 +558,6 @@
           section.className = 'carousel';
           section.setAttribute('tabindex', '-1');
           section.innerHTML = `
-            <h2 class="section-title">${state} <small style="float:right;color:var(--muted)">Todos</small></h2>
             <div class="nav left" aria-hidden="true" data-action="scroll-left">◀</div>
             <div class="nav right" aria-hidden="true" data-action="scroll-right">▶</div>
             <div class="wrap-row" role="list" aria-label="Canais de ${state}"></div>
