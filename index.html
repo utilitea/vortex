@@ -76,16 +76,50 @@ header.topbar {
     .carousel .wrap-row::-webkit-scrollbar { height: 10px; }
     .carousel .wrap-row::-webkit-scrollbar-thumb { background: linear-gradient(90deg, var(--blue-1), var(--blue-2)); border-radius: 10px; }
     
-    .channel-card {
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-      min-width: 140px; max-width: 220px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.08));
-      padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.03); cursor: pointer; transition: transform .15s ease, box-shadow .15s, border-color .15s;
-      flex: 0 0 auto;
-    }
-    .channel-card:focus, .channel-card.active {
-      outline: none; transform: translateY(-6px); box-shadow: 0 14px 30px rgba(10,180,100,0.15);
-      border: 1px solid var(--accent);
-    }
+/* ============================================= */
+/* --- BLOCO ÚNICO PARA OS CARDS DOS CANAIS --- */
+/* ============================================= */
+
+/* ESTADO PADRÃO DO CARD */
+.channel-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 140px;
+  max-width: 220px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.08));
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+  flex: 0 0 auto;
+  
+  /* Animação de entrada que já tínhamos */
+  animation: fadeInUp 0.5s ease-out both;
+  animation-delay: var(--delay, 0s);
+
+  /* TRANSIÇÃO ATUALIZADA:
+     Aplicada a todas as propriedades com uma duração um pouco maior (0.25s) 
+     para que o efeito de zoom fique mais suave e perceptível. */
+  transition: all 0.25s ease-out;
+}
+
+/* ESTADO ATIVO: aplica-se ao passar o mouse (hover), focar com teclado (focus) ou quando está ativo (.active) */
+.channel-card:hover,
+.channel-card:focus,
+.channel-card.active {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.3), 0 8px 15px rgba(10, 180, 100, 0.2);
+  
+  /* O EFEITO DE ZOOM E ELEVAÇÃO */
+  transform: translateY(-10px) scale(1.05);
+  
+  /* Garante que o card ativo fique na frente dos outros */
+  z-index: 10;
+}
+
     .channel-thumb { width: 180px; height: 100px; border-radius: 10px; object-fit: contain; background: linear-gradient(90deg, #0b1912, rgba(255,255,255,0.02)); display: flex; align-items: center; justify-content: center; }
     .channel-thumb img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; }
     .channel-name { font-size: 14px; color: var(--muted); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
@@ -139,6 +173,12 @@ header.topbar {
     .channel-list {
       display: flex; gap: 16px;
     }
+
+.channel-card.focused {
+  transform: scale(1.1);
+  z-index: 10; /* Garante que o card fique acima dos outros */
+}
+
 .overlay-card {
   min-width: 180px; /* Mantém a largura mínima que você já tinha */
   width: 200px;     /* NOVO: Define uma largura fixa para o card */
@@ -219,6 +259,18 @@ header.topbar {
 main.wrap {
   padding-top: 80px; 
 }
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
   </style>
 </head>
 <body>
@@ -242,15 +294,21 @@ main.wrap {
 
   </main>
 
+<div id="noResults" style="display: none; text-align: center; padding: 40px; color: var(--muted);">
+  <h3>Nenhum canal encontrado</h3>
+  <p>Tente buscar por outro termo.</p>
+</div>
+
   <div class="player-modal" id="playerModal" aria-hidden="true">
     <div class="player-box" role="dialog" aria-modal="true" aria-label="Player de canais">
       <div class="viewer" id="viewer">
         <video id="videoPlayer" controls playsinline></video>
         
-        <div class="player-controls" id="playerControls">
-          <h3 class="player-title" id="nowPlayingTitle">Carregando...</h3>
-          <button class="close-player" id="closePlayer">Fechar</button>
-        </div>
+<div class="player-controls" id="playerControls">
+  <h3 class="player-title" id="nowPlayingTitle">Carregando...</h3>
+  <button class="action-btn" id="pipButton" title="Picture-in-Picture" style="margin-left: auto; margin-right: 12px;">PiP</button>
+  <button class="close-player" id="closePlayer">Fechar</button>
+</div>
         
         <div class="channel-overlay" id="channelOverlay">
           <div class="channel-overlay-title">Canais disponíveis</div>
@@ -306,6 +364,11 @@ main.wrap {
       "title": "Paraná Turismo",
       "src": "https://aovivo.paranaeducativa.pr.gov.br/hls/tve.m3u8",
       "thumbnail": "https://s3minio.webativa.com.br/redeitv/thumb-tv-parana-turismo.png"
+    },
+    {
+      "title": "Amazon Sat",
+      "src": "https://amazonsat.brasilstream.com.br/hls/amazonsat/index.m3u8",
+      "thumbnail": "https://upload.wikimedia.org/wikipedia/pt/7/74/Logotipo_de_2024_do_Amazon_Sat.png"
     }
   ],
   "Filmes": [
@@ -340,6 +403,11 @@ main.wrap {
       "thumbnail": "https://deadline.com/wp-content/uploads/2024/06/MovieSphere.jpg?w=681&h=383&crop=1"
     },
     {
+      "title": "Moviesphere II",
+      "src": "https://stream.ads.ottera.tv/playlist.m3u8?network_id=6178",
+      "thumbnail": "https://img.static-ottera.com/prod/run/linear_channel/thumbnails/widescreen/logo_1.jpg"
+    },
+    {
       "title": "Sony One",
       "src": "https://spt-sonyoneclassicas-1-br.samsung.wurl.tv/playlist.m3u8",
       "thumbnail": "https://cdn.techshake.com/imagens/sony-one-e-o-novo-canal-do-prime-video.jpg"
@@ -348,6 +416,11 @@ main.wrap {
       "title": "Sony One Emoções",
       "src": "https://spt-sonyoneemocoes-1-br.samsung.wurl.tv/playlist.m3u8",
       "thumbnail": "https://images.samsung.com/is/image/samsung/assets/br/tvs/smart-tv/channel-list/SONYEMOCOESType-B_-1x1-Circles-476x476AngelaSuarez.png?$ORIGIN_PNG$"
+    },
+    {
+      "title": "Sony One Cinema",
+      "src": "https://spt-sonyoneclassicas-1-br.samsung.wurl.tv/playlist.m3u8",
+      "thumbnail": "https://www.cxtv.com.br/img/Tvs/Logo/webp-l/bad404e3cd39c2d21e3bc053c44691ec.webp"
     },
     {
       "title": "Nova Play",
@@ -363,6 +436,16 @@ main.wrap {
       "title": "Channel 1",
       "src": "https://stmv1.srvif.com/movies1/movies1/playlist.m3u8",
       "thumbnail": "https://channel1.ipgotv.net.br/LOGO_CH1.png"
+    },
+    {
+      "title": "Urban Movies",
+      "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/108.m3u8",
+      "thumbnail": "https://urbantv.com.br/wp-content/uploads/2024/01/movies-serv-1170x658.jpg"
+    },
+    {
+      "title": "Urban Series",
+      "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/110.m3u8",
+      "thumbnail": "https://urban.tv.br/canais/logo-urbanseries.jpg"
     }
   ],
 
@@ -398,14 +481,9 @@ main.wrap {
       "thumbnail": "https://www.glntv.com.br/admin/assets/img/logo.png"
   },
   {
-      "title": "",
-      "src": "",
-      "thumbnail": ""
-  },
-  {
-      "title": "",
-      "src": "",
-      "thumbnail": ""
+      "title": "Chroma Tv",
+      "src": "https://5c483b9d1019c.streamlock.net/8054/8054/playlist.m3u8",
+      "thumbnail": "https://pa-str.srvsite.com/arquivos/7197/cabecalho-7197-20240825174302.png"
   }
 ],
   "Variedades": [
@@ -537,8 +615,8 @@ main.wrap {
     "thumbnail": "https://i.ytimg.com/vi/3QCfJFMolcg/maxresdefault.jpg"
   },
   {
-    "title": "Record News ES",
-    "src": "https://5cf4a2c2512a2.streamlock.net/8016/8016/playlist.m3u8",
+    "title": "Record News ottera",
+    "src": "https://stream.ads.ottera.tv/playlist.m3u8?network_id=2116",
     "thumbnail": "https://i.ytimg.com/vi/3QCfJFMolcg/maxresdefault.jpg"
   },
   {
@@ -610,42 +688,49 @@ main.wrap {
       const channelOverlay = document.getElementById('channelOverlay');
       const channelList = document.getElementById('channelList');
       const playerControls = document.getElementById('playerControls');
+      const noResultsDiv = document.getElementById('noResults');
+      const pipButton = document.getElementById('pipButton');
       
       let allChannels = Object.values(channelsData).flat();
       let currentChannelIndex = -1;
       let hideOverlayTimeout;
 
       // --- Lógica de Renderização Dinâmica (Home) ---
-      function renderCarousels() {
-        mainContent.querySelectorAll('.carousel').forEach(car => car.remove());
-        
-        for (const state in channelsData) {
-          const section = document.createElement('section');
-          section.className = 'carousel';
-          section.setAttribute('tabindex', '-1');
-          section.innerHTML = `
-            <h2 class="section-title">${state} <small style="float:right;color:var(--muted)"></small></h2>
-            <div class="nav left" aria-hidden="true" data-action="scroll-left">◀</div>
-            <div class="nav right" aria-hidden="true" data-action="scroll-right">▶</div>
-            <div class="wrap-row" role="list" aria-label="Canais de ${state}"></div>
-          `;
-          const wrapRow = section.querySelector('.wrap-row');
-          channelsData[state].forEach(channel => {
-            const card = document.createElement('div');
-            card.className = 'channel-card';
-            card.setAttribute('tabindex', '0');
-            card.setAttribute('data-src', channel.src);
-            card.setAttribute('data-title', channel.title);
-            card.innerHTML = `
-              <div class="channel-thumb"><img src="${channel.thumbnail}" alt="Thumbnail do canal ${channel.title}"></div>
-              <div class="channel-name">${channel.title}</div>
-            `;
-            wrapRow.appendChild(card);
-          });
-          mainContent.appendChild(section);
-        }
-        setupCarousels();
-      }
+// --- Lógica de Renderização Dinâmica (Home) ---
+function renderCarousels() {
+  mainContent.querySelectorAll('.carousel').forEach(car => car.remove());
+
+  for (const state in channelsData) {
+    const section = document.createElement('section');
+    section.className = 'carousel';
+    section.setAttribute('tabindex', '-1');
+    section.innerHTML = `
+      <h2 class="section-title">${state} <small style="float:right;color:var(--muted)"></small></h2>
+      <div class="nav left" aria-hidden="true" data-action="scroll-left">◀</div>
+      <div class="nav right" aria-hidden="true" data-action="scroll-right">▶</div>
+      <div class="wrap-row" role="list" aria-label="Canais de ${state}"></div>
+    `;
+    const wrapRow = section.querySelector('.wrap-row');
+
+    // A CORREÇÃO ESTÁ NA LINHA ABAIXO:
+    channelsData[state].forEach((channel, index) => { // <--- ADICIONAMOS O (channel, index) AQUI
+      const card = document.createElement('div');
+      // A linha abaixo agora funciona porque 'index' existe:
+      card.style.setProperty('--delay', `${index * 50}ms`); 
+      card.className = 'channel-card';
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('data-src', channel.src);
+      card.setAttribute('data-title', channel.title);
+      card.innerHTML = `
+        <div class="channel-thumb"><img src="${channel.thumbnail}" alt="Thumbnail do canal ${channel.title}"></div>
+        <div class="channel-name">${channel.title}</div>
+      `;
+      wrapRow.appendChild(card);
+    });
+    mainContent.appendChild(section);
+  }
+  setupCarousels();
+}
 
       function setupCarousels() {
         document.querySelectorAll('.carousel').forEach(car => {
@@ -666,13 +751,30 @@ main.wrap {
       }
     
       // --- Lógica de Busca ---
-      searchInput.addEventListener('input', (e) => {
-        const q = e.target.value.toLowerCase().trim();
-        document.querySelectorAll('.channel-card').forEach(card => {
-          const name = (card.querySelector('.channel-name')?.textContent || '').toLowerCase();
-          card.style.display = name.includes(q) ? '' : 'none';
-        });
-      });
+// --- Lógica de Busca ---
+searchInput.addEventListener('input', (e) => {
+  const q = e.target.value.toLowerCase().trim();
+  let resultsFound = false;
+
+  document.querySelectorAll('.carousel').forEach(carousel => {
+    let channelsVisible = 0;
+    carousel.querySelectorAll('.channel-card').forEach(card => {
+      const name = (card.querySelector('.channel-name')?.textContent || '').toLowerCase();
+      const isVisible = name.includes(q);
+      card.style.display = isVisible ? '' : 'none';
+      if (isVisible) {
+        channelsVisible++;
+        resultsFound = true;
+      }
+    });
+    // Esconde a categoria inteira se nenhum canal corresponde à busca
+    carousel.style.display = channelsVisible > 0 ? '' : 'none';
+  });
+
+  // Mostra ou esconde a mensagem de "nenhum resultado"
+  mainContent.style.display = resultsFound ? '' : 'none';
+  noResultsDiv.style.display = resultsFound ? 'none' : 'block';
+});
     
 // --- Lógica do Player Modal e Vídeo ---
 function loadAndPlay(src) {
@@ -951,22 +1053,39 @@ function handleGlobalKeys(e) {
         }
       });
     
-      document.addEventListener('focusin', (e) => {
-        const activeCard = document.querySelector('.channel-card.active');
-        if (activeCard) activeCard.classList.remove('active');
-        
-        if (e.target.classList?.contains('channel-card')) {
-          e.target.classList.add('active');
-        }
-        
-        const activeOverlayCard = document.querySelector('.overlay-card.active');
-        if (activeOverlayCard) activeOverlayCard.classList.remove('active');
-        
-        if (e.target.classList?.contains('overlay-card')) {
-          e.target.classList.add('active');
-        }
-      });
+document.addEventListener('focusin', (e) => {
+  const activeCard = document.querySelector('.channel-card.active');
+  if (activeCard) {
+    activeCard.classList.remove('active');
+    activeCard.classList.remove('focused'); // Remove a classe focused
+  }
+  
+  if (e.target.classList?.contains('channel-card')) {
+    e.target.classList.add('active');
+    e.target.classList.add('focused'); // Adiciona a classe focused
+  }
+  
+  const activeOverlayCard = document.querySelector('.overlay-card.active');
+  if (activeOverlayCard) activeOverlayCard.classList.remove('active');
+  
+  if (e.target.classList?.contains('overlay-card')) {
+    e.target.classList.add('active');
+  }
+});
     
+pipButton.addEventListener('click', () => {
+    if (document.pictureInPictureElement) {
+        document.exitPictureInPicture().catch(e => console.error("Erro ao sair do PiP:", e));
+    } else {
+        video.requestPictureInPicture().catch(e => console.error("Erro ao entrar em PiP:", e));
+    }
+});
+
+// Desabilita o botão se o navegador não tiver suporte
+if (!document.pictureInPictureEnabled) {
+    pipButton.style.display = 'none';
+}
+
       renderCarousels();
     })();
   </script>
