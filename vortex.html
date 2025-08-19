@@ -57,9 +57,21 @@
     #searchInput { width: 100%; padding: 12px 18px; border-radius: 25px; border: 1px solid var(--border-color); background: var(--panel); color: var(--text-primary); font-size: 15px; outline: none; transition: all 0.3s ease; }
     #searchInput:focus, #searchInput:focus-visible { border-color: var(--accent-green); box-shadow: 0 0 15px var(--shadow-color-glow); outline: none; }
     .hero-section { height: 35vh; min-height: 300px; margin-bottom: calc(var(--gap) * 2); border-radius: var(--card-radius); overflow: hidden; position: relative; display: flex; align-items: flex-end; padding: calc(var(--gap) * 1.5); background-size: cover; background-position: center; cursor: pointer; border: 1px solid transparent; transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
-    .filter-nav { display: flex; gap: 10px; margin-bottom: var(--gap); overflow-x: auto; padding-bottom: 15px; }
-    .filter-btn { padding: 8px 20px; border: 1px solid var(--border-color); background: transparent; color: var(--text-muted); border-radius: 20px; cursor: pointer; transition: all 0.2s ease; white-space: nowrap; }
+/* Tente estes novos valores */
+.filter-nav {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto; 
+    overflow-y: visible;
+    padding-top: 15px;      /* <-- Aumentamos de 10px para 15px */
+    padding-bottom: 20px;   /* <-- Aumentamos de 15px para 20px */
+    margin-bottom: calc(var(--gap) + 15px); /* <-- Também aumentamos aqui para consistência */
+    padding-left: 10px;  /* <-- Adiciona um respiro na esquerda */
+    padding-right: 10px; /* <-- Adiciona um respiro na direita */
+}    
+    .filter-btn { position: relative; padding: 8px 20px; border: 1px solid var(--border-color); background: transparent; color: var(--text-muted); border-radius: 20px; cursor: pointer; transition: all 0.2s ease; white-space: nowrap; }
     .filter-btn:hover { color: var(--text-primary); border-color: var(--text-muted); }
+.filter-btn:focus-visible { transform: translateY(-5px) scale(1.05); z-index: 10; }
     .filter-btn.active { background: var(--accent-green); border-color: var(--accent-green); color: var(--bg-primary); font-weight: 600; }
 
 /* Adicione este bloco ao seu CSS principal */
@@ -79,7 +91,9 @@
     gap: var(--gap);
     overflow-x: auto;
     padding-bottom: var(--gap);
-    padding-top: 15px; /* <-- ADICIONE APENAS ESTA LINHA */
+    padding-top: 25px; /* <-- ADICIONE APENAS ESTA LINHA */
+    padding-left: 10px;  /* <-- Adiciona um respiro na esquerda */
+    padding-right: 10px; /* <-- Adiciona um respiro na direita */
 }
     .channel-card { position: relative; min-width: 160px; border-radius: var(--card-radius); border: 1px solid var(--border-color); background: var(--bg-secondary); cursor: pointer; overflow: hidden; transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
 .channel-card:hover, .channel-card:focus-visible,
