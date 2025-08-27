@@ -1,0 +1,454 @@
+{
+  "categorias": [
+    {
+      "titulo": "Tv Aberta",
+      "canais": [
+        {
+          "title": "SBT",
+          "src": "https://stream.amsolution.net.br:8443/live/66db1cf131d45/index.m3u8",
+          "thumbnail": "https://upload.wikimedia.org/wikipedia/pt/thumb/4/41/Logotipo_do_SBT.svg/1200px-Logotipo_do_SBT.svg.png"
+        },
+        {
+          "title": "SBT",
+          "src": "https://video09.logicahost.com.br/sbtmutum/sbtmutum/playlist.m3u8",
+          "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/2/29/Logotipo_TV_MUTUM.png"
+        },
+        {
+          "title": "SBT",
+          "src": "https://stream.amsolution.net.br:8443/live/66db1cf131d45/index.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/tv-difusora.webp"
+        },
+        {
+          "title": "Record",
+          "src": "https://video08.logicahost.com.br/portaldatropical02/portaldatropical02/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/tv-tropical.webp"
+        },
+        {
+          "title": "Record",
+          "src": "https://cdn.live.br1.jmvstream.com/w/LVW-10841/LVW10841_mT77z9o2cP/playlist.m3u8",
+          "thumbnail": "https://tvconquista.com.br/wp-content/uploads/2020/01/LOGO-TV-CONQUISTA-FONTE-ESCURA-2048x1697.png"
+        },
+        {
+          "title": "Record",
+          "src": "https://tv03.zas.media:1936/rftv/rftv/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/rede-familia.webp"
+        },
+        {
+          "title": "Rede Tv",
+          "src": "https://video04.logicahost.com.br/tvpampa/tvpampa/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/tv-pampa.webp"
+        },
+        {
+          "title": "Rede TV",
+          "src": "https://tv01.zas.media:1936/redetvparana/redetvparana/playlist.m3u8",
+          "thumbnail": "https://redeitv.online/roku/imgcanais/cana-rede-tv.png?alt=media&token=cc279d94-72ac-4523-8227-1d9b96a9df58"
+        },
+        {
+          "title": "Band",
+          "src": "https://5b7f3c45ab7c2.streamlock.net/arapuan/ngrp:arapuan_all/playlist.m3u8",
+          "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Rede_Bandeirantes_logo_2018.svg/800px-Rede_Bandeirantes_logo_2018.svg.png"
+        },
+        {
+          "title": "Band",
+          "src": "https://cdn.live.br1.jmvstream.com/w/LVW-15748/LVW15748_Yed7yzLuRC/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/rbatv.webp"
+        },
+        {
+          "title": "Band",
+          "src": "https://5b7f3c45ab7c2.streamlock.net/arapuan/ngrp:arapuan_all/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/tv-arapuan.webp"
+        },
+        {
+          "title": "Paraná Turismo",
+          "src": "https://aovivo.paranaeducativa.pr.gov.br/hls/tve.m3u8",
+          "thumbnail": "https://s3minio.webativa.com.br/redeitv/thumb-tv-parana-turismo.png"
+        },
+        {
+          "title": "Tv Meio",
+          "src": "https://isaocorp.cloudecast.com/redemeio/index.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/meio-norte-tv.webp"
+        },
+        {
+          "title": "Amazon Sat",
+          "src": "https://amazonsat.brasilstream.com.br/hls/amazonsat/index.m3u8",
+          "thumbnail": "https://upload.wikimedia.org/wikipedia/pt/7/74/Logotipo_de_2024_do_Amazon_Sat.png"
+        },
+        {
+          "title": "TV Alternativa",
+          "src": "https://stmv5.samcast.com.br/wagner7919/wagner7919/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/tv-alternativa.webp"
+        },
+        {
+          "title": "Cabo Frio TV",
+          "src": "https://video05.logicahost.com.br/ararutv/ararutv/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/cabo-frio-tv.webp"
+        }
+      ]
+    },
+    {
+      "titulo": "Filmes",
+      "canais": [
+        {
+          "title": "Runtime",
+          "src": "https://run-rt-br.otteravision.com/run/rt_br/rt_br_720p_high.m3u8",
+          "thumbnail": "https://img3.static-ottera.com/prod/run/linear_channel/thumbnails/poster/366x206/runtime_brazil_1400x2000_0.jpg"
+        },
+        {
+          "title": "Ação",
+          "src": "https://run-rt-ra.otteravision.com/run/rt_ra/rt_ra_720.m3u8",
+          "thumbnail": "https://img2.static-ottera.com/prod/run/linear_channel/thumbnails/widescreen/366x206/runtime_br_action_bg.jpg"
+        },
+        {
+          "title": "Comédia",
+          "src": "https://run-rc-br.otteravision.com/run/rc_br/rc_br_720.m3u8",
+          "thumbnail": "https://img3.static-ottera.com/prod/run/linear_channel/thumbnails/poster/366x206/runtime_comedy_brazil_1400x2000.jpg"
+        },
+        {
+          "title": "Família",
+          "src": "https://run-rufb.otteravision.com/run/rufb/rufb.m3u8",
+          "thumbnail": "https://i.ytimg.com/vi/hJeqJsSxV8w/maxresdefault.jpg"
+        },
+        {
+          "title": "Crime",
+          "src": "https://run-cr-br.otteravision.com/run/cr_br/cr_br_720.m3u8",
+          "thumbnail": "https://img2.static-ottera.com/prod/run/linear_channel/thumbnails/poster/960x540/runtime_crime_brazil_1400x2000.jpg"
+        },
+        {
+          "title": "Moviesphere",
+          "src": "https://amg00353-amg00353c29-plex-us-3205.playouts.now.amagi.tv/1080p-cc/index.m3u8",
+          "thumbnail": "https://deadline.com/wp-content/uploads/2024/06/MovieSphere.jpg?w=681&h=383&crop=1"
+        },
+        {
+          "title": "Moviesphere II",
+          "src": "https://stream.ads.ottera.tv/playlist.m3u8?network_id=6178",
+          "thumbnail": "https://img.static-ottera.com/prod/run/linear_channel/thumbnails/widescreen/logo_1.jpg"
+        },
+        {
+          "title": "Sony One",
+          "src": "https://spt-sonyoneclassicas-1-br.samsung.wurl.tv/playlist.m3u8",
+          "thumbnail": "https://cdn.techshake.com/imagens/sony-one-e-o-novo-canal-do-prime-video.jpg"
+        },
+        {
+          "title": "Sony One Emoções",
+          "src": "https://spt-sonyoneemocoes-1-br.samsung.wurl.tv/playlist.m3u8",
+          "thumbnail": "https://images.samsung.com/is/image/samsung/assets/br/tvs/smart-tv/channel-list/SONYEMOCOESType-B_-1x1-Circles-476x476AngelaSuarez.png?$ORIGIN_PNG$"
+        },
+        {
+          "title": "Sony One Cinema",
+          "src": "https://spt-sonyoneclassicas-1-br.samsung.wurl.tv/playlist.m3u8",
+          "thumbnail": "https://www.cxtv.com.br/img/Tvs/Logo/webp-l/bad404e3cd39c2d21e3bc053c44691ec.webp"
+        },
+        {
+          "title": "Nova Play",
+          "src": "https://stmv1.srvstm.com/abc7891/abc7891/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/tv-nova-play.webp"
+        },
+        {
+          "title": "Cindie Lite",
+          "src": "https://cc-hqw8u5r1nshjc.akamaized.net/scheduler/scheduleMaster/352.m3u8",
+          "thumbnail": "https://img.odcdn.com.br/wp-content/uploads/2025/04/cindie-5-1920x1080.jpg"
+        },
+        {
+          "title": "Channel 1",
+          "src": "https://stmv1.srvif.com/movies1/movies1/playlist.m3u8",
+          "thumbnail": "https://channel1.ipgotv.net.br/LOGO_CH1.png"
+        },
+        {
+          "title": "Urban Movies",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/108.m3u8",
+          "thumbnail": "https://urbantv.com.br/wp-content/uploads/2024/01/movies-serv-1170x658.jpg"
+        },
+        {
+          "title": "Urban Series",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/110.m3u8",
+          "thumbnail": "https://urban.tv.br/canais/logo-urbanseries.jpg"
+        }
+      ]
+    },
+    {
+      "titulo": "WebTv",
+      "canais": [
+        {
+          "title": "Caravana Play",
+          "src": "https://stmv2.voxtvhd.com.br/keynni6990/keynni6990/playlist.m3u8",
+          "thumbnail": "https://caravanaplay.com.br/admin/assets/img/logo.png"
+        },
+        {
+          "title": "Canal 29",
+          "src": "https://stmv1.srvif.com/canal29/canal29/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/canal-29.webp"
+        },
+        {
+          "title": "Tv Sonata",
+          "src": "https://video04.logicahost.com.br/isonata/isonata/playlist.m3u8",
+          "thumbnail": "https://tvsonata.com.br/storage/690/config/YIpr9GvubiZ14KntfgXqTob4kMpue1cFo2R5h91h.png"
+        },
+        {
+          "title": "Xtreme Tv",
+          "src": "https://stmv1.srvif.com/xtremetv/xtremetv/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/webtv-xtreme.webp"
+        },
+        {
+          "title": "GLN Tv",
+          "src": "https://stmv8.samcast.com.br/glnfilmes/glnfilmes/playlist.m3u8",
+          "thumbnail": "https://www.glntv.com.br/admin/assets/img/logo.png"
+        },
+        {
+          "title": "Chroma Tv",
+          "src": "https://5c483b9d1019c.streamlock.net/8054/8054/playlist.m3u8",
+          "thumbnail": "https://pa-str.srvsite.com/arquivos/7197/cabecalho-7197-20240825174302.png"
+        },
+        {
+          "title": "TV da Pesca",
+          "src": "https://isaocorp.cloudecast.com/tvdapesca/index.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/tv-da-pesca.webp"
+        },
+        {
+          "title": "Tv Channel Network",
+          "src": "https://tvchannel.tvr.ovh/video28392/video28392/playlist.m3u8",
+          "thumbnail": "https://static.wixstatic.com/media/ac52cc_bf31c5de74a344708282bd3d55fc7464~mv2.png"
+        },
+        {
+          "title": "Reviva TV",
+          "src": "https://stmv.webtvninjas.com.br/webtvni1/webtvni1/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/reviva-tv.webp"
+        },
+        {
+          "title": "TVitapê",
+          "src": "https://stream01.msolutionbrasil.com.br/hls/tvitape/live.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/tvitape.webp"
+        },
+        {
+          "title": "TV Ondas Play",
+          "src": "https://stmv5.samcast.com.br/portalondasdemarica/portalondasdemarica/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/tv-ondas-play.webp"
+        }
+      ]
+    },
+    {
+      "titulo": "Variedades",
+      "canais": [
+        {
+          "title": "Master Chefe",
+          "src": "https://amg00627-amg00627c9-runtime-latam-2613.playouts.now.amagi.tv/playlist/amg00627-banijayfast-masterchefbrazil-runtimelatam/playlist.m3u8",
+          "thumbnail": "https://img3.static-ottera.com/prod/run/linear_channel/thumbnails/widescreen/366x206/runtime_masterchefbrasil_logo_1920x1080_-_suraj_s.jpg"
+        },
+        {
+          "title": "Cultne TV",
+          "src": "https://edge-fast3.evrideo.tv/231ed5ca-94a1-466e-94fd-4cf831fcdd2f_1000027150_HLS/manifest.m3u8",
+          "thumbnail": "https://cultne.tv/site/img/logo_cultnetv-1200x627.png"
+        },
+        {
+          "title": "UOL",
+          "src": "https://video01.soultv.com.br/uoltv/uoltv/playlist.m3u8",
+          "thumbnail": "https://conteudo.imguol.com.br/c/play/logo_canaluol_2024.svg"
+        },
+        {
+          "title": "ypêtv",
+          "src": "https://video09.logicahost.com.br/yptvoficioal/yptvoficioal/playlist.m3u8",
+          "thumbnail": "https://ypetv.com.br/wp-content/uploads/2024/08/LOGO-HORIZONTAL-YPE-TV.png"
+        },
+        {
+          "title": "Tv Caravelas",
+          "src": "https://video09.logicahost.com.br/tvcaravelas/tvcaravelas/playlist.m3u8",
+          "thumbnail": "https://pa-str.srvsite.com/arquivos/4506/cabecalho-4506-20190507094833.png"
+        },
+        {
+          "title": "Tv Tudo",
+          "src": "https://tv02.zas.media:1936/tvtudo/tvtudo/playlist.m3u8",
+          "thumbnail": "https://www.tvtudo.tv.br/wp-content/uploads/sites/34/2022/12/logo.png"
+        },
+        {
+          "title": "Tv Metropolitana",
+          "src": "https://stmv5.samcast.com.br/claudio8701/claudio8701/playlist.m3u8",
+          "thumbnail": "https://pa-str.srvsite.com/arquivos/7258/cabecalho-7258-20240527153716.png"
+        },
+        {
+          "title": "Tv Carioca Internacional",
+          "src": "https://video04.logicahost.com.br/cariocainternacional/cariocainternacional/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/tv-carioca.webp"
+        },
+        {
+          "title": "TV MAX",
+          "src": "https://video09.logicahost.com.br/tvmax/tvmax/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/tv-max-rio.webp"
+        },
+        {
+          "title": "Rede Tv Mais",
+          "src": "https://video09.logicahost.com.br/redetvmais/redetvmais/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/rede-tv-mais.webp"
+        },
+        {
+          "title": "Tv Mega Brasil",
+          "src": "https://video01.kshost.com.br/sergio7305/sergio7305/playlist.m3u8",
+          "thumbnail": "https://tvmegabrasil.com.br/wp-content/uploads/2024/10/cropped-12.png"
+        },
+        {
+          "title": "Tv Mais Maricá",
+          "src": "https://5cf4a2c2512a2.streamlock.net/tvmaismarica/tvmaismarica/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/tv-mais-marica.webp"
+        },
+        {
+          "title": "Bem Mais Tv",
+          "src": "https://video09.logicahost.com.br/bemmaistv01/bemmaistv01/playlist.m3u8",
+          "thumbnail": "https://s3minio.webativa.com.br/redeitv/thumb-bem-mais-tv.png"
+        },
+        {
+          "title": "Diário",
+          "src": "https://netdiario.brasilstream.com.br/hls/netdiario/index.m3u8",
+          "thumbnail": "https://netdiario.com.br/wp-content/uploads/2022/02/logo-1.png"
+        },
+        {
+          "title": "TV Santa Cecilia",
+          "src": "https://60d88f8ce1206.streamlock.net/2063/2063/playlist.m3u8",
+          "thumbnail": "https://santaportal.com.br/wp/wp-content/uploads/2021/05/20204262849389g.jpg"
+        },
+        {
+          "title": "Play TV",
+          "src": "https://isaocorp.cloudecast.com/playtv/index.fmp4.m3u8",
+          "thumbnail": "https://playtv.com.br/site/wp-content/uploads/2024/07/PlayTVHorizontal@500x.png"
+        },
+        {
+          "title": "Rede TVS",
+          "src": "https://video01.kshost.com.br:4443/rede1250/rede1250/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/rede-tvs.webp"
+        },
+        {
+          "title": "Acesso",
+          "src": "https://cdn.live.br1.jmvstream.com/webtv/tvacessochannel/playlist/playlist.m3u8",
+          "thumbnail": "https://s3minio.webativa.com.br/redeitv/thumb-acesso.png"
+        },
+        {
+          "title": "RS Play",
+          "src": "https://tv03.zas.media:1936/rsplay/rsplay/playlist.m3u8",
+          "thumbnail": "https://s3minio.webativa.com.br/redeitv/thumb-rs-play.png"
+        },
+        {
+          "title": "Rede NGT",
+          "src": "https://isaocorp.cloudecast.com/ngt/index.fmp4.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/rede-ngt.webp"
+        },
+        {
+          "title": "Unique",
+          "src": "https://pop.uniquetv.com.br/uniquetv/video.m3u8",
+          "thumbnail": "https://d14vd6r4ppsx57.cloudfront.net/media/brand/img/web/62/62_img_bg_image_293x165_small.jpg"
+        },
+        {
+          "title": "Sou [.tv]",
+          "src": "https://vdo1.audiostream.com.br:3010/live/soutvlive.m3u8",
+          "thumbnail": "https://d14vd6r4ppsx57.cloudfront.net/media/brand/img/web/139/139_img_bg_image_293x165_small.jpg"
+        },
+        {
+          "title": "VRT",
+          "src": "https://sistemavrt2023.vrtchannel.tv.br:3626/hybrid/play.m3u8",
+          "thumbnail": "https://d14vd6r4ppsx57.cloudfront.net/media/brand/img/web/69/69_img_bg_image_293x165_small.jpg"
+        },
+        {
+          "title": "Wording",
+          "src": "https://tv02.zas.media:1936/wordingtv/wordingtv/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/wording.webp"
+        }
+      ]
+    },
+    {
+      "titulo": "Jornalismo",
+      "canais": [
+        {
+          "title": "Record News",
+          "src": "https://run-rnw-rn.otteravision.com/rnw/rn/rnw_rn_720p_high.m3u8",
+          "thumbnail": "https://www.recordamericas.com/wp-content/uploads/2024/06/logo-recordnews.png"
+        },
+        {
+          "title": "Record News ottera",
+          "src": "https://stream.ads.ottera.tv/playlist.m3u8?network_id=2116",
+          "thumbnail": "https://www.recordamericas.com/wp-content/uploads/2024/06/logo-recordnews.png"
+        },
+        {
+          "title": "CNN Brasil",
+          "src": "https://video01.soultv.com.br/cnnbrasil/cnnbrasil/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/cnn-brasil.webp"
+        },
+        {
+          "title": "24h News",
+          "src": "https://origin-nxtv.b-cdn.net/24H_NEWS/tracks-v1a1/mono.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/24h-news.webp"
+        },
+        {
+          "title": "Band News",
+          "src": "https://hplay.tv/augetv/12396547488/1300.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/band-news.webp"
+        },
+        {
+          "title": "SIC Notícias",
+          "src": "https://d277k9d1h9dro4.cloudfront.net/out/v1/293e7c3464824cbd8818ab8e49dc5fe9/index.m3u8",
+          "thumbnail": "https://s3minio.webativa.com.br/redeitv/thumb-sic-noticias.png"
+        }
+      ]
+    },
+    {
+      "titulo": "Religiosos",
+      "canais": [
+        {
+          "title": "Oasis",
+          "src": "https://stmv5.samcast.com.br/oasistv/oasistv/playlist.m3u8",
+          "thumbnail": "https://oasistv.com.br/imagens/logosite.png"
+        },
+        {
+          "title": "Rede Vida",
+          "src": "https://d12e4o88jd8gex.cloudfront.net/out/v1/cea3de0b76ac4e82ab8ee0fd3f17ce12/index.m3u8",
+          "thumbnail": "https://redevida.com.br/wp-content/uploads/2024/07/logo-redevida.png.webp"
+        },
+        {
+          "title": "Tv Aparecida",
+          "src": "https://cdn.live.br1.jmvstream.com/w/LVW-9716/LVW9716_HbtQtezcaw/playlist.m3u8",
+          "thumbnail": "https://upload.wikimedia.org/wikipedia/pt/1/1e/Logotipo_da_TV_Aparecida.png"
+        },
+        {
+          "title": "Tv Pai Eterno",
+          "src": "https://video09.logicahost.com.br/paieterno/paieterno/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/tv-pai-eterno.webp"
+        },
+        {
+          "title": "Vivax Tv",
+          "src": "https://stmv2.samcast.com.br/marcus8647/marcus8647/playlist.m3u8",
+          "thumbnail": "https://static.wixstatic.com/media/9b4759_2455541c839e4dc6972ff9234d2ef2bf~mv2.png"
+        },
+        {
+          "title": "Rede Gospel",
+          "src": "https://cdn.live.br1.jmvstream.com/w/LVW-8719/LVW8719_AcLVAxWy5J/playlist.m3u8",
+          "thumbnail": "https://upload.wikimedia.org/wikipedia/pt/thumb/b/ba/LGT_Rede_Gospel.png/250px-LGT_Rede_Gospel.png"
+        },
+        {
+          "title": "Tv Life América",
+          "src": "https://streaming.cloudecast.com/hls/tvlifeamerica/index.m3u8",
+          "thumbnail": "https://s3minio.webativa.com.br/redeitv/thumb-tv-life-america.png"
+        },
+        {
+          "title": "Rede Universo Tv",
+          "src": "https://srv5.zcast.com.br/universotv/universotv/playlist.m3u8",
+          "thumbnail": "https://pa-str.srvsite.com/arquivos/7032/cabecalho-7032-20241028161430.png"
+        },
+        {
+          "title": "Rede Mais Família",
+          "src": "https://video09.logicahost.com.br/redefamilia/redefamilia/playlist.m3u8",
+          "thumbnail": "https://d14vd6r4ppsx57.cloudfront.net/media/brand/Logotipo_100x100_vdONDb3.png"
+        },
+        {
+          "title": "Gospel Music",
+          "src": "https://stmv1.srvif.com/gmusic/gmusic/playlist.m3u8",
+          "thumbnail": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh6rkHnWxPl0unrUZcIVPhyphenhyphenMg1ql9mahJcBFY8cqaUtWWsiXfyaMOD1MaHpn5buvzDlZMfVe-Y1zsTbX7AvgLGOXcyfhhkt8fLWJTCRbQfQjRb-i2lvPQakcIz1fB4fmlXRuHYpI2XOrQSjH3O0klLi-ElvGTVKIeLIJYEIYMFAXKU5WmfB-MVA1_7Vez4/s300/GOSPEL%20MUSIC%20TELEVISION.webp"
+        },
+        {
+          "title": "Gospel Movies",
+          "src": "https://stmv1.srvif.com/gospelf/gospelf/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/gospel-movie-tv.webp"
+        },
+        {
+          "title": "Gospel Cartoon",
+          "src": "https://stmv1.srvif.com/gospelcartoon/gospelcartoon/playlist.m3u8",
+          "thumbnail": "https://img.vidks.net/v2x/l/gospel-cartoon.webp"
+        }
+      ]
+    }
+  ]
+}
