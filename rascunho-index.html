@@ -244,7 +244,7 @@ const VortexApp = {
     buildInitialDOM() {
         this.elements.searchInput.setAttribute('tabindex', '0');
         this.elements.heroSection.setAttribute('tabindex', '0');
-        const featured = channelsData["Filmes"]?.[0] || Object.values(channelsData).flat()[0];
+        const featured = channelsData["Tv Aberta"]?.[1] || Object.values(channelsData).flat()[0];
         this.elements.heroSection.dataset.src = featured.src;
         this.elements.heroSection.dataset.title = featured.title;
         this.elements.heroSection.innerHTML = `
@@ -524,6 +524,7 @@ const VortexApp = {
 </script>
 </body>
 </html>
+
 
 
 
