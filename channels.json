@@ -1,4 +1,8 @@
 {
+  "featuredChannel": {
+    "category": "Tv Aberta",
+    "index": 1
+  },
   "categorias": [
     {
       "titulo": "Tv Aberta",
@@ -451,4 +455,5 @@
       ]
     }
   ]
+
 }
