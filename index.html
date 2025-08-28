@@ -168,6 +168,10 @@ const VortexApp = {
             }
             const jsonData = await response.json();
 
+            // ARMAZENA O IDENTIFICADOR DO CANAL EM DESTAQUE
+            this.featuredChannelIdentifier = jsonData.featuredChannel;
+
+          
             // Transforma o JSON (que é um array de categorias) na estrutura de objeto que o código original usava
             this.channelsData = jsonData.categorias.reduce((acc, category) => {
                 acc[category.titulo] = category.canais;
@@ -191,7 +195,8 @@ const VortexApp = {
     buildInitialDOM() {
         this.elements.searchInput.setAttribute('tabindex', '0');
         this.elements.heroSection.setAttribute('tabindex', '0');
-        const featured = this.channelsData["Filmes"]?.[0] || Object.values(this.channelsData).flat()[0];
+        const featuredIdentifier = this.featuredChannelIdentifier; // Pega o identificador que carregamos
+        const featured = this.channelsData[featuredIdentifier.category]?.[featuredIdentifier.index] || Object.values(this.channelsData).flat()[0];
         this.elements.heroSection.dataset.src = featured.src;
         this.elements.heroSection.dataset.title = featured.title;
         this.elements.heroSection.innerHTML = `
