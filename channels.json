@@ -208,6 +208,21 @@
           "thumbnail": "https://urbantv.com.br/wp-content/uploads/2024/01/movies-serv-1170x658.jpg"
         },
         {
+          "title": "Urban Kids",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/105.m3u8",
+          "thumbnail": "https://urban.tv.br/canais/logo-urbankids.jpg"
+        },
+        {
+          "title": "Urban Drive",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/106.m3u8",
+          "thumbnail": "https://urbantv.com.br/wp-content/uploads/2024/01/drive-serv-1170x658.jpg"
+        },
+        {
+          "title": "Urban Travel",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/111.m3u8",
+          "thumbnail": "https://urban.tv.br/canais/logo-urbantravel.jpg"
+        },
+        {
           "title": "Urban Series",
           "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/110.m3u8",
           "thumbnail": "https://urban.tv.br/canais/logo-urbanseries.jpg"
@@ -217,26 +232,6 @@
     {
       "titulo": "WebTv",
       "canais": [
-        {
-          "title": "ü Kids",
-          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/105.m3u8",
-          "thumbnail": ""
-        },
-        {
-          "title": "ü Drive",
-          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/106.m3u8",
-          "thumbnail": ""
-        },
-        {
-          "title": "ü Series",
-          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/110.m3u8",
-          "thumbnail": ""
-        },
-        {
-          "title": "ü Travel",
-          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/111.m3u8",
-          "thumbnail": ""
-        },
         {
           "title": "Caravana Play",
           "src": "https://stmv2.voxtvhd.com.br/keynni6990/keynni6990/playlist.m3u8",
@@ -562,4 +557,5 @@
   ]
 
 }
+
 
