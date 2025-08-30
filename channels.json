@@ -8,9 +8,19 @@
       "titulo": "Tv Aberta",
       "canais": [
         {
+          "title": "Globo",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/1.m3u8",
+          "thumbnail": "https://assets.meuguia.tv/logos/grd@2x.png"
+        },
+        {
+          "title": "SBT",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/2.m3u8",
+          "thumbnail": "https://assets.meuguia.tv/logos/sbt@2x.png"
+        },
+        {
           "title": "SBT",
           "src": "https://stream.amsolution.net.br:8443/live/66db1cf131d45/index.m3u8",
-          "thumbnail": "https://upload.wikimedia.org/wikipedia/pt/thumb/4/41/Logotipo_do_SBT.svg/1200px-Logotipo_do_SBT.svg.png"
+          "thumbnail": "https://assets.meuguia.tv/logos/sbt@2x.png"
         },
         {
           "title": "SBT",
@@ -38,6 +48,11 @@
           "thumbnail": "https://img.vidks.net/v2x/l/rede-familia.webp"
         },
         {
+          "title": "Record",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/13.m3u8",
+          "thumbnail": "https://assets.meuguia.tv/logos/rec@2x.png"
+        },
+        {
           "title": "Rede Tv",
           "src": "https://video04.logicahost.com.br/tvpampa/tvpampa/playlist.m3u8",
           "thumbnail": "https://img.vidks.net/v2x/l/tv-pampa.webp"
@@ -46,6 +61,11 @@
           "title": "Rede TV",
           "src": "https://tv01.zas.media:1936/redetvparana/redetvparana/playlist.m3u8",
           "thumbnail": "https://redeitv.online/roku/imgcanais/cana-rede-tv.png?alt=media&token=cc279d94-72ac-4523-8227-1d9b96a9df58"
+        },
+        {
+          "title": "Band",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/3.m3u8",
+          "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Rede_Bandeirantes_logo_2018.svg/800px-Rede_Bandeirantes_logo_2018.svg.png"
         },
         {
           "title": "Band",
@@ -68,6 +88,16 @@
           "thumbnail": "https://s3minio.webativa.com.br/redeitv/thumb-tv-parana-turismo.png"
         },
         {
+          "title": "Cultura",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/6.m3u8",
+          "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Cultura_logo_2013.svg/885px-Cultura_logo_2013.svg.png"
+        },
+        {
+          "title": "Futura",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/9.m3u8",
+          "thumbnail": "https://futura.frm.org.br/static/images/futura/favicon.png"
+        },
+        {
           "title": "Tv Meio",
           "src": "https://isaocorp.cloudecast.com/redemeio/index.m3u8",
           "thumbnail": "https://img.vidks.net/v2x/l/meio-norte-tv.webp"
@@ -81,6 +111,16 @@
           "title": "TV Alternativa",
           "src": "https://stmv5.samcast.com.br/wagner7919/wagner7919/playlist.m3u8",
           "thumbnail": "https://img.vidks.net/v2x/l/tv-alternativa.webp"
+        },
+        {
+          "title": "Saude",
+          "src": "",
+          "thumbnail": "https://iptv.vivatele.com/live/viva_padrao/viva2384/4.m3u8"
+        },
+        {
+          "title": "Ra Tim Bum",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/15.m3u8",
+          "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/d/de/TV_R%C3%A1-Tim-Bum.png"
         },
         {
           "title": "Cabo Frio TV",
@@ -116,6 +156,11 @@
           "title": "Crime",
           "src": "https://run-cr-br.otteravision.com/run/cr_br/cr_br_720.m3u8",
           "thumbnail": "https://img2.static-ottera.com/prod/run/linear_channel/thumbnails/poster/960x540/runtime_crime_brazil_1400x2000.jpg"
+        },
+        {
+          "title": "Adrenalina Pura",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/64.m3u8",
+          "thumbnail": "https://mediaprd.adrenalinapura.com/wp-content/uploads/2025/03/19131457/logo-adrenalina-pura.svg"
         },
         {
           "title": "Moviesphere",
@@ -172,6 +217,26 @@
     {
       "titulo": "WebTv",
       "canais": [
+        {
+          "title": "ü Kids",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/105.m3u8",
+          "thumbnail": ""
+        },
+        {
+          "title": "ü Drive",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/106.m3u8",
+          "thumbnail": ""
+        },
+        {
+          "title": "ü Series",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/110.m3u8",
+          "thumbnail": ""
+        },
+        {
+          "title": "ü Travel",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/111.m3u8",
+          "thumbnail": ""
+        },
         {
           "title": "Caravana Play",
           "src": "https://stmv2.voxtvhd.com.br/keynni6990/keynni6990/playlist.m3u8",
@@ -236,6 +301,41 @@
           "title": "Master Chefe",
           "src": "https://amg00627-amg00627c9-runtime-latam-2613.playouts.now.amagi.tv/playlist/amg00627-banijayfast-masterchefbrazil-runtimelatam/playlist.m3u8",
           "thumbnail": "https://img3.static-ottera.com/prod/run/linear_channel/thumbnails/widescreen/366x206/runtime_masterchefbrasil_logo_1920x1080_-_suraj_s.jpg"
+        },
+        {
+          "title": "Master Chefe",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/115.m3u8",
+          "thumbnail": "https://upload.wikimedia.org/wikipedia/pt/e/e8/MasterChef_Brasil.jpg"
+        },
+        {
+          "title": "Comedy Central",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/116.m3u8",
+          "thumbnail": "https://www.comedycentral.com.br/favicon.ico"
+        },
+        {
+          "title": "woohoo",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/73.m3u8",
+          "thumbnail": "https://woohoo.com.br/wp-content/uploads/2024/01/Logo-APP-Woohoo-Video-branco.png"
+        },
+        {
+          "title": "geekdot",
+          "src": "https://stream.ichibansys.com:3764/hybrid/play.m3u8",
+          "thumbnail": "https://geekdot.live/wp-content/uploads/2024/05/GKD_CAPA_NEW.png"
+        },
+        {
+          "title": "Love Nature",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/72.m3u8",
+          "thumbnail": "https://lovenature.com/wp-content/uploads/2020/08/love-nature-logo_peacock.png"
+        },
+        {
+          "title": "Viajando pelo Brasil",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/65.m3u8",
+          "thumbnail": "https://pbs.twimg.com/profile_images/1227080934341652480/vqUJVVHq_400x400.jpg"
+        },
+        {
+          "title": "Tastemade",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/69.m3u8",
+          "thumbnail": "https://www.oficinadanet.com.br/imagens/post/43847/onde-assistir-tastemade-iptv.jpg"
         },
         {
           "title": "Cultne TV",
@@ -401,6 +501,11 @@
           "title": "Rede Vida",
           "src": "https://d12e4o88jd8gex.cloudfront.net/out/v1/cea3de0b76ac4e82ab8ee0fd3f17ce12/index.m3u8",
           "thumbnail": "https://redevida.com.br/wp-content/uploads/2024/07/logo-redevida.png.webp"
+        },
+        {
+          "title": "Canção Nova",
+          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/5.m3u8",
+          "thumbnail": "https://static.cancaonova.com/images/marca.png"
         },
         {
           "title": "Tv Aparecida",
