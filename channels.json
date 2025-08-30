@@ -8,7 +8,7 @@
       "titulo": "Tv Aberta",
       "canais": [
         {
-          "title": "Globo",
+          "title": "Globo RJ",
           "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/1.m3u8",
           "thumbnail": "https://assets.meuguia.tv/logos/grd@2x.png"
         },
@@ -562,3 +562,4 @@
   ]
 
 }
+
