@@ -8,29 +8,29 @@
       "titulo": "Tv Aberta",
       "canais": [
         {
-          "title": "Globo RJ",
-          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/1.m3u8",
+          "title": "Globo SP",
+          "src": "https://cdn-3.nxplay.com.br/GLOBO_SP_TK/index.m3u8",
           "thumbnail": "https://assets.meuguia.tv/logos/grd@2x.png"
         },
         {
-          "title": "SBT",
-          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/2.m3u8",
+          "title": "SBT (Cidade Verde)",
+          "src": "https://6836041ea1117.streamlock.net:443/cverde/cverde/playlist.m3u8",
           "thumbnail": "https://assets.meuguia.tv/logos/sbt@2x.png"
         },
         {
-          "title": "SBT",
-          "src": "https://stream.amsolution.net.br:8443/live/66db1cf131d45/index.m3u8",
+          "title": "SBT (Aratu)",
+          "src": "https://cdn.live.br1.jmvstream.com/w/LVW-9359/LVW9359_XSyReL0QVf/playlist.m3u8",
           "thumbnail": "https://assets.meuguia.tv/logos/sbt@2x.png"
         },
         {
-          "title": "SBT",
+          "title": "SBT (Mutum)",
           "src": "https://video09.logicahost.com.br/sbtmutum/sbtmutum/playlist.m3u8",
-          "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/2/29/Logotipo_TV_MUTUM.png"
+          "thumbnail": "https://assets.meuguia.tv/logos/sbt@2x.png"
         },
         {
-          "title": "SBT",
+          "title": "SBT (Difusora)",
           "src": "https://stream.amsolution.net.br:8443/live/66db1cf131d45/index.m3u8",
-          "thumbnail": "https://img.vidks.net/v2x/l/tv-difusora.webp"
+          "thumbnail": "https://assets.meuguia.tv/logos/sbt@2x.png"
         },
         {
           "title": "Record",
@@ -65,22 +65,22 @@
         {
           "title": "Band",
           "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/3.m3u8",
-          "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Rede_Bandeirantes_logo_2018.svg/800px-Rede_Bandeirantes_logo_2018.svg.png"
+          "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Rede_Bandeirantes_logo_2018.svg"
         },
         {
           "title": "Band",
           "src": "https://5b7f3c45ab7c2.streamlock.net/arapuan/ngrp:arapuan_all/playlist.m3u8",
-          "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Rede_Bandeirantes_logo_2018.svg/800px-Rede_Bandeirantes_logo_2018.svg.png"
+          "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Rede_Bandeirantes_logo_2018.svg"
         },
         {
           "title": "Band",
           "src": "https://cdn.live.br1.jmvstream.com/w/LVW-15748/LVW15748_Yed7yzLuRC/playlist.m3u8",
-          "thumbnail": "https://img.vidks.net/v2x/l/rbatv.webp"
+          "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Rede_Bandeirantes_logo_2018.svg"
         },
         {
           "title": "Band",
           "src": "https://5b7f3c45ab7c2.streamlock.net/arapuan/ngrp:arapuan_all/playlist.m3u8",
-          "thumbnail": "https://img.vidks.net/v2x/l/tv-arapuan.webp"
+          "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Rede_Bandeirantes_logo_2018.svg"
         },
         {
           "title": "Paraná Turismo",
@@ -89,12 +89,12 @@
         },
         {
           "title": "Cultura",
-          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/6.m3u8",
-          "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Cultura_logo_2013.svg/885px-Cultura_logo_2013.svg.png"
+          "src": "https://player-tvcultura.stream.uol.com.br/live/tvcultura.m3u8",
+          "thumbnail": "https://eitv6.cdn.broadpeak.io/account351-i1438/channel/14/thumb_logo-rosa-novo-1755800911.png"
         },
         {
           "title": "Futura",
-          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/9.m3u8",
+          "src": "https://tv.unisc.br/hls/test.m3u8",
           "thumbnail": "https://futura.frm.org.br/static/images/futura/favicon.png"
         },
         {
@@ -114,8 +114,8 @@
         },
         {
           "title": "Saude",
-          "src": "",
-          "thumbnail": "https://iptv.vivatele.com/live/viva_padrao/viva2384/4.m3u8"
+          "src": "https://eitv7.cdn.broadpeak.io/account351-i1495/event/canalsaude/auto.m3u8",
+          "thumbnail": "https://eitv7.cdn.broadpeak.io/account351-i1495/channel/50/decanso-bg-cor-1920-x-1980-1773432859.jpg"
         },
         {
           "title": "Ra Tim Bum",
@@ -159,18 +159,13 @@
         },
         {
           "title": "Adrenalina Pura",
-          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/64.m3u8",
+          "src": "https://amg00740-sofa-amg00740c7-tcl-us-7126.playouts.now.amagi.tv/1080p-cc/index.m3u8",
           "thumbnail": "https://mediaprd.adrenalinapura.com/wp-content/uploads/2025/03/19131457/logo-adrenalina-pura.svg"
         },
         {
-          "title": "Moviesphere",
-          "src": "https://amg00353-amg00353c29-plex-us-3205.playouts.now.amagi.tv/1080p-cc/index.m3u8",
-          "thumbnail": "https://deadline.com/wp-content/uploads/2024/06/MovieSphere.jpg?w=681&h=383&crop=1"
-        },
-        {
-          "title": "Moviesphere II",
+          "title": "Movie Sphere",
           "src": "https://stream.ads.ottera.tv/playlist.m3u8?network_id=6178",
-          "thumbnail": "https://img.static-ottera.com/prod/run/linear_channel/thumbnails/widescreen/logo_1.jpg"
+          "thumbnail": "https://deadline.com/wp-content/uploads/2024/06/MovieSphere.jpg?w=681&h=383&crop=1"
         },
         {
           "title": "Sony One",
@@ -188,43 +183,33 @@
           "thumbnail": "https://www.cxtv.com.br/img/Tvs/Logo/webp-l/bad404e3cd39c2d21e3bc053c44691ec.webp"
         },
         {
-          "title": "Nova Play",
-          "src": "https://stmv1.srvstm.com/abc7891/abc7891/playlist.m3u8",
-          "thumbnail": "https://img.vidks.net/v2x/l/tv-nova-play.webp"
-        },
-        {
           "title": "Cindie Lite",
           "src": "https://cc-hqw8u5r1nshjc.akamaized.net/scheduler/scheduleMaster/352.m3u8",
           "thumbnail": "https://img.odcdn.com.br/wp-content/uploads/2025/04/cindie-5-1920x1080.jpg"
         },
         {
           "title": "Channel 1",
-          "src": "https://stmv1.srvif.com/movies1/movies1/playlist.m3u8",
+          "src": "https://stmv2.painelvideocast.com.br/movies1/movies1/playlist.m3u8",
           "thumbnail": "https://channel1.ipgotv.net.br/LOGO_CH1.png"
         },
         {
           "title": "Urban Movies",
-          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/108.m3u8",
+          "src": "http://200.194.238.229:8383/live/urbanmovies/playlist.m3u8",
           "thumbnail": "https://urbantv.com.br/wp-content/uploads/2024/01/movies-serv-1170x658.jpg"
         },
         {
           "title": "Urban Kids",
-          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/105.m3u8",
+          "src": "http://200.194.238.229:8383/live/urbankids/playlist.m3u8",
           "thumbnail": "https://urban.tv.br/canais/logo-urbankids.jpg"
         },
         {
-          "title": "Urban Drive",
-          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/106.m3u8",
-          "thumbnail": "https://urbantv.com.br/wp-content/uploads/2024/01/drive-serv-1170x658.jpg"
-        },
-        {
           "title": "Urban Travel",
-          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/111.m3u8",
+          "src": "http://200.194.238.229:8383/live/urbantravel/playlist.m3u8",
           "thumbnail": "https://urban.tv.br/canais/logo-urbantravel.jpg"
         },
         {
           "title": "Urban Series",
-          "src": "https://iptv.vivatele.com/live/viva_padrao/viva2384/110.m3u8",
+          "src": "http://200.194.238.229:8383/live/urbanseries/playlist.m3u8",
           "thumbnail": "https://urban.tv.br/canais/logo-urbanseries.jpg"
         }
       ]
@@ -238,19 +223,9 @@
           "thumbnail": "https://caravanaplay.com.br/admin/assets/img/logo.png"
         },
         {
-          "title": "Canal 29",
-          "src": "https://stmv1.srvif.com/canal29/canal29/playlist.m3u8",
-          "thumbnail": "https://img.vidks.net/v2x/l/canal-29.webp"
-        },
-        {
           "title": "Tv Sonata",
           "src": "https://video04.logicahost.com.br/isonata/isonata/playlist.m3u8",
           "thumbnail": "https://tvsonata.com.br/storage/690/config/YIpr9GvubiZ14KntfgXqTob4kMpue1cFo2R5h91h.png"
-        },
-        {
-          "title": "Xtreme Tv",
-          "src": "https://stmv1.srvif.com/xtremetv/xtremetv/playlist.m3u8",
-          "thumbnail": "https://img.vidks.net/v2x/l/webtv-xtreme.webp"
         },
         {
           "title": "GLN Tv",
@@ -452,6 +427,11 @@
     {
       "titulo": "Jornalismo",
       "canais": [
+        {
+          "title": "SBT News",
+          "src": "https://sbtnews.maissbt.com/3.m3u8",
+          "thumbnail": "https://voxnews.com.br/wp-content/uploads/2025/10/SBT_news.jpg"
+        },
         {
           "title": "Record News",
           "src": "https://run-rnw-rn.otteravision.com/rnw/rn/rnw_rn_720p_high.m3u8",
